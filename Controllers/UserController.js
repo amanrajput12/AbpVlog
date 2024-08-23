@@ -3,7 +3,7 @@ import { User } from "../Models/UserSchema.js";
 
 export const register = async function (req,res) {
     try {
-        const {email,name} = req.body
+        const {email,name,acessToken} = req.body
         console.log("email",req.body);
         
         if(!(email,name)){
@@ -15,13 +15,16 @@ export const register = async function (req,res) {
         console.log(alreadyuser);
         
         if(alreadyuser){
-            return res.status(401).json({
-                message:"Already register user"
+            const value  = await User.findOneAndUpdate({email},{acessToken:acessToken})
+            return  res.status(201).json({
+                message:"user Login sucess",
+                data:value
             })
         }
         const userdata = await User.create({
             email,
-            username:name
+            username:name,
+            acessToken,
         })
         if(userdata){
             return res.status(200).json({
@@ -35,3 +38,5 @@ export const register = async function (req,res) {
         
     }
 }
+
+
