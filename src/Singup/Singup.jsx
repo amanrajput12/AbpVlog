@@ -116,9 +116,10 @@ function Singup() {
   }); 
   return (
     <>
-      <h2>Login</h2>
-      <button onClick={() =>login()}>Login</button>
-    
+    <div className='flex  flex-col justify-center items-center pt-24'>
+      <h2>Login user</h2>
+      <button  className='bg-slate-700 p-5 mt-3 rounded-xl hover:bg-slate-600' onClick={() =>login()}>Login</button>
+      </div>
 
      
     </>

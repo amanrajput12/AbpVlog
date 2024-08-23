@@ -29,11 +29,12 @@ const routes = createBrowserRouter([
 const root = createRoot(document.getElementById('root'));
 
 root.render(
-  <StrictMode>
-    <Provider store={Appstore}>
+         
+         <Provider store={Appstore}>
    <GoogleOAuthProvider clientId={import.meta.env.VITE_clientId}>
   <RouterProvider router={routes} />
     </GoogleOAuthProvider> 
     </Provider>
-  </StrictMode>,
+  
+
 )
