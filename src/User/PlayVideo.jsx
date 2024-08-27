@@ -1,105 +1,41 @@
-import React, { useState, useRef, useEffect } from 'react';
-import ReactPlayer from 'react-player';
-import { useSelector } from 'react-redux';
+
+
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import {  useSelector } from 'react-redux';
 
 const VideoPlayer = () => {
-     const time = new Date().toLocaleTimeString()
-  const playerRef = useRef(null);
-  const [startTime, setStartTime] = useState(null);
-  const [EndTime, setEndTime] = useState(null);
-    const Id = useSelector((store)=>store.GetVideo.videoId) 
+  const [timeSpent, setTimeSpent] = useState(0);
 
-
-
-    
-
+  const videoId = useSelector((store)=>store.GetVideo.videoId) 
+  // console.log("id of video",videoId);
+  
   useEffect(() => {
-    setStartTime(time)
-    console.log("start time",time);
-    
-    let timer 
-  //   timer = setInterval(() => {
-  //     const currentPlayTimestamp =  Math.floor(playerRef.current.getCurrentTime());
-  //     const VideoTime = playerRef.current.getDuration();
-  //     const BufferEnd =Math.floor(playerRef.current.getSecondsLoaded());
-
-  //  console.log("play",currentPlayTimestamp,"   ",BufferEnd, " videotime",VideoTime);
-   
-    
-  //   //   handlePlay();
-  //   //   handleBufferEnd();
-
-  //     // Compare the play and bufferEnd timestamps
-  //     if (currentPlayTimestamp < BufferEnd) {
-  //       console.log('Play is fine');
-  //     } else if (currentPlayTimestamp >= VideoTime) {
-  //       // clearInterval(timer)
-  //       console.log('video End');
-  //     }
-
-  //   }, 1500);
-
+    const interval = setInterval(() => {
+      console.log(timeSpent);
+      
+      setTimeSpent((prevTime) => prevTime + 1);
+    }, 1000);
+      
     return () => {
-        setEndTime(time)
-        console.log("video end at",EndTime);
-        
-      clearInterval(check);
+      clearInterval(interval);
+      // handleTimeSpent();
     };
-  }, []);
- 
-  const handlePlay = () => {
-    const timestamp = playerRef.current.getCurrentTime();
-
+  }, [timeSpent]);
     
-   
-    console.log(`Play event at ${timestamp.toFixed(2)}s`);
+     
+  const handleTimeSpent = async () => {
+    try {
+      await axios.post('http://localhost:4000/v1/timespend/create', { userId, videoId, timeSpent });
+    } catch (error) {
+      console.error('Error tracking time spent:', error);
+    }
   };
-
-  const handlePause = () => {
-    const timestamp = playerRef.current.getCurrentTime();
-
-    console.log(`Pause event at ${timestamp.toFixed(2)}s`);
-  };
-
-  const handleBuffer = () => {
-    const timestamp = playerRef.current.getCurrentTime();
-  
-    console.log(`Buffer event at ${timestamp.toFixed(2)}s`);
-  };
-
-  const handleBufferEnd = () => {
-    const timestamp =playerRef.current.getSecondsLoaded();
-       console.log("loading time",timestamp);
-       
-    console.log(`BufferEnd event at ${timestamp}s`);
-  };
-
-  const handleReady = () => {
-    const timestamp = playerRef.current.getCurrentTime();
-  
-    console.log(`Video ready at ${timestamp.toFixed(2)}s`);
-  };
- 
 
   return (
     <div>
-      <ReactPlayer
-        ref={playerRef}
-        url={`https://www.youtube.com/watch?v=${Id}`}
-        playing={true}
-        controls={true}
-      
-        onReady={handleReady}   
-        onPlay={handlePlay}
-        onPause={handlePause}
-        onBuffer={handleBuffer}
-        onBufferEnd={handleBufferEnd}
-        width="100%"
-        height="50vh"
-      />
-      <div>
-       
-      </div>
+      <video src={`https://www.youtube.com/watch?v=PqDMJ7cJvNY`} controls />
     </div>
   );
 };
