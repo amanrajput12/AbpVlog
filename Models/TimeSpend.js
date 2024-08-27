@@ -1,7 +1,5 @@
 import mongoose, { Mongoose } from "mongoose";
 
-
-
 const TimeSpendSchema =new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
@@ -9,7 +7,7 @@ const TimeSpendSchema =new mongoose.Schema({
         required:true
     },
      Time:{
-        type:String,
+        type:Number,
         required:true
      }
 })
