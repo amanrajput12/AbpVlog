@@ -1,6 +1,6 @@
 import React from 'react'
 import Singup from './Singup/Singup.jsx'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const App = () => {
   const navigate = useNavigate()
@@ -9,6 +9,7 @@ const App = () => {
       <Singup/>
       <h3 onClick={()=>navigate('/admin')}>Admin</h3>
       <button onClick={()=>navigate('/admin/dashboard')}>Dashboard admin</button>
+      <Outlet/>
     </div>
   )
 }

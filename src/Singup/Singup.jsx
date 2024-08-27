@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import singup from './useSingup'
 import { useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 
 
 function Singup() {
 
   const dispatch = useDispatch()
-
-
-
+  const navigate = useNavigate()
+const logincheck = useSelector((store)=>store.user.data.message)
+  // console.log(logincheck);
+     
   // Fetch YouTube data after login
   useEffect(() => {
-  
+    if(logincheck==="user Login sucess"){
+      navigate('/video')
+    }
   //  subscribeToChannel(accessToken,"UCAuUUnT6oDeKwE6v1NGQxug")
     
-  }, []);
+  }, [logincheck]);
 
 
 
