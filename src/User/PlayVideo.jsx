@@ -48,7 +48,7 @@ const VideoPlayer = () => {
 
   const sendTimeSpent = async (timeSpent) => {
     try {
-      await axios.post('http://localhost:4000/v1/timespend/create', {
+      await axios.post('https://abpvlog.onrender.com/v1/timespend/create', {
         userId,
         videoId: Id,
         timeSpend: timeSpent,

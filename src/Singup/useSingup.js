@@ -28,7 +28,7 @@ const singup = createAsyncThunk("/user/sigup",async(value)=>{
           const info = await fetchUserInfo(value)        
             console.log("info",info);
 
-            const resp = await fetch("http://localhost:4000/v1/user/register",{
+            const resp = await fetch("https://abpvlog.onrender.com/v1/user/register",{
                 method:"POST",
                 headers: {
                   'Content-Type': 'application/json',
