@@ -10,11 +10,19 @@ import Admin from './Admin/Admin.jsx';
 import AdminDashboard from './Admin/AdminDashboard.jsx';
 import Video from './User/Video.jsx';
 import PlayVideo from './User/PlayVideo.jsx';
+import Singup from './Singup/Singup.jsx';
+import TimeSpend from './Admin/TimeSpend.jsx';
 const routes = createBrowserRouter([
+ 
   {
+    
     path:'/',
     element:<App/>,
     children:[
+      {
+        path:"login",
+        element:<Singup/>
+       },
       {
         path:"video",
         element:<Video/>
@@ -32,6 +40,10 @@ const routes = createBrowserRouter([
         {
           path: "dashboard",
           element:<AdminDashboard/>,
+        },
+        {
+          path:'time',
+          element:<TimeSpend/>
         }
       ]
     }

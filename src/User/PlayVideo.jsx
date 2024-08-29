@@ -1,41 +1,97 @@
-
-
-
-import React, { useEffect, useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import ReactPlayer from 'react-player';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
-import {  useSelector } from 'react-redux';
-
+import Cookies from "js-cookie"
 const VideoPlayer = () => {
-  const [timeSpent, setTimeSpent] = useState(0);
+  const playerRef = useRef(null);
+  const [realTimeSpent, setRealTimeSpent] = useState(0);
+  const [requiredTimetowatch, setRequiredTimetowatch] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [VideoDuration,setVideoDuration] = useState(0)
+  const Id = useSelector((store) => store.GetVideo.videoId);
+  const userId = Cookies.get('userId')
 
-  const videoId = useSelector((store)=>store.GetVideo.videoId) 
-  // console.log("id of video",videoId);
-  
+  // Calculate required time efficiently outside useEffect
+  const calculateRequiredTime = useCallback(() => {
+    const videoDuration = playerRef.current?.getDuration() || 0;
+    setVideoDuration(videoDuration)
+    return Number(videoDuration - (videoDuration / 4));
+  }, [playerRef]);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      console.log(timeSpent);
+    setRequiredTimetowatch(calculateRequiredTime());
+
+    // Clear any existing interval on unmount or video pause
+    return () => clearInterval(intervalId);
+  }, [isPlaying, calculateRequiredTime]); // Only update on isPlaying or duration change
+
+  const intervalId = useRef(null);
+
+  useEffect(() => {
+    if (isPlaying) {
+      intervalId.current = setInterval(() => {
+        console.log('value',realTimeSpent);
+        
+        setRealTimeSpent((prevTime) => prevTime + 1);
+      }, 1000);
+    } else {
+      clearInterval(intervalId.current);
+      console.log("after pause",realTimeSpent);
       
-      setTimeSpent((prevTime) => prevTime + 1);
-    }, 1000);
-      
-    return () => {
-      clearInterval(interval);
-      // handleTimeSpent();
-    };
-  }, [timeSpent]);
-    
-     
-  const handleTimeSpent = async () => {
+      intervalId.current = null; // Reset to avoid memory leaks
+    }
+
+    // Clean up when component unmounts
+    return () => clearInterval(intervalId.current);
+  }, [isPlaying]); // Only update on isPlaying change
+
+  const sendTimeSpent = async (timeSpent) => {
     try {
-      await axios.post('http://localhost:4000/v1/timespend/create', { userId, videoId, timeSpent });
+      await axios.post('http://localhost:4000/v1/timespend/create', {
+        userId,
+        videoId: Id,
+        timeSpend: timeSpent,
+      });
+      console.log('Real-time spent sent to backend:', timeSpent);
     } catch (error) {
       console.error('Error tracking time spent:', error);
     }
   };
 
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+  };
+
+  const handleEnded = () => {
+    setIsPlaying(false);
+    if (realTimeSpent > VideoDuration) {
+       
+      sendTimeSpent(VideoDuration);
+    }
+    else if (realTimeSpent >=requiredTimetowatch){
+      sendTimeSpent(realTimeSpent)
+    }
+  };
+
   return (
-    <div>
-      <video src={`https://www.youtube.com/watch?v=PqDMJ7cJvNY`} controls />
+    <div className="relative bg-gray-900 p-4 rounded-lg shadow-lg">
+      <ReactPlayer
+        ref={playerRef}
+        url={`https://www.youtube.com/watch?v=${Id}`}
+        playing={isPlaying}
+        controls={true}
+        onPlay={handlePlay}
+        onPause={handlePause}
+        onEnded={handleEnded}
+        width="100%"
+        height="50vh"
+        className="rounded-lg overflow-hidden"
+      />
     </div>
   );
 };
