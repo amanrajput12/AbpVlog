@@ -1,48 +1,57 @@
 import { TimeSpend } from "../Models/TimeSpend.js";
+import { Video } from "../Models/VideoSchema.js";
 
 // Create TimeSpend
 export const CreateTimespend = async function (req, res) {
+    const { userId, videoId, timeSpend } = req.body;
+             console.log("userId",userId,videoId,timeSpend);
+             
     try {
-        const { Time, user } = req.body;
-        
-        if (!Time || !user) {
-            return res.status(400).json({
-                message: "Time and user are required"
-            });
-        }
-
-        const resp = await TimeSpend.create({
-            Time,
-            user
-        });
-
-        res.status(201).json({
-            message: "Time updated successfully",
-            data: resp
-        });
+      let record = await TimeSpend.findOne({ userId, videoId });
+  
+      if (record) {
+        // Update the existing record
+        record.timeSpend += timeSpend;
+        record.lastWatched = Date.now();
+      } else {
+        // Create a new record
+        record = new TimeSpend({ userId, videoId, timeSpend });
+      }
+  
+      await record.save();
+      res.status(200).json({ success: true, data: record });
     } catch (error) {
-        console.log("Error on createTimespend:", error.message);
-        res.status(500).json({
-            message: "Internal server error",
-            error: error.message
-        });
+        console.log("error on the timespend created",error.message);
+        
+      res.status(500).json({ success: false, error: 'Server Error' });
     }
 }
 
 // Get TimeSpend
 export const GetTimespend = async function (req, res) {
-    try {
-        const resp = await TimeSpend.find().populate('user');  // Use 'user' instead of 'User'
-        
-        res.status(200).json({
-            message: "TimeSpend retrieved successfully",
-            data: resp
-        });
-    } catch (error) {
-        console.log("Error on getting TimeSpend:", error.message);
-        res.status(500).json({
-            message: "Internal server error",
-            error: error.message
-        });
-    }
+  try {
+      const timeSpends = await TimeSpend.find().populate('userId'); // Populate only userId
+
+      const populatedTimeSpends = await Promise.all(timeSpends.map(async (timeSpend) => {
+          const video = await Video.findOne({ videoId: timeSpend.videoId }); // Manually query Video
+          return {
+              ...timeSpend.toObject(),
+              video, // Include the Video document in the result
+          };
+      }));
+
+      console.log(populatedTimeSpends);
+      
+      res.status(200).json({
+          message: "TimeSpend retrieved successfully",
+          data: populatedTimeSpends
+      });
+  } catch (error) {
+      console.log("Error on getting TimeSpend:", error.message);
+      res.status(500).json({
+          message: "Internal server error",
+          error: error.message
+      });
+  }
 }
+
