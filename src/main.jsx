@@ -20,7 +20,7 @@ const routes = createBrowserRouter([
     element:<App/>,
     children:[
       {
-        path:"login",
+        path:"",
         element:<Singup/>
        },
       {
