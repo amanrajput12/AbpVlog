@@ -10,7 +10,7 @@ const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [VideoDuration,setVideoDuration] = useState(0)
   const Id = useSelector((store) => store.GetVideo.videoId);
-  const [userId, setUserId] = useState(Cookies.get('userId'));
+  const [userId, setUserId] = useState(Cookies.get('myid'));
                
   // Calculate required time efficiently outside useEffect
   const calculateRequiredTime = useCallback(() => {
@@ -48,6 +48,8 @@ const VideoPlayer = () => {
 
   const sendTimeSpent = async (timeSpent) => {
     try {
+      console.log("userId",userId);
+      
       const time = Math.round(timeSpent)
       await axios.post('https://abpvlog.onrender.com/v1/timespend/create', {
         userId,

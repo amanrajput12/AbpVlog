@@ -9,7 +9,7 @@ function Singup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(Cookies.get('accessToken'));
-  const [userId, setUserId] = useState(Cookies.get('userId'));
+  const [userId, setUserId] = useState(Cookies.get('myid'));
 
   useEffect(() => {
     if (accessToken && userId) {

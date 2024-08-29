@@ -17,13 +17,17 @@ const SignupSlice = createSlice({
         state.error = null;
       })
       .addCase(signup.fulfilled, (state, action) => {
-        console.log('action payload:', action.payload);
+        console.log('Action Payload:', action.payload);
 
         const accessToken = action.payload?.data?.acessToken;
-        const userId = action.payload?.data?._id;
-        const userRole = action?.payload?.data?.role 
+        const Id = action.payload.data._id;
+        const userRole = action?.payload?.data?.role;
 
-        if (!(accessToken && userId)) {
+        console.log('AccessToken:', accessToken);
+        console.log('UserId:', Id);
+        console.log('UserRole:', userRole);
+
+        if (!(accessToken && Id)) {
           console.error("Access token or user ID not found in payload.");
           return;
         }
@@ -32,10 +36,11 @@ const SignupSlice = createSlice({
         const expires = 55 / 1440;
 
         // Set cookies with the correct expiration time
+        Cookies.set('myid',Id,{expires:4})
         Cookies.set('accessToken', accessToken, { expires });
-        Cookies.set('userId', userId, { expires });
-        if(userRole === "admin"){
-            Cookies.set('userRole',userRole,{expires})
+     
+        if (userRole === "admin") {
+          Cookies.set('userRole', userRole, { expires });
         }
 
         state.loading = false;
