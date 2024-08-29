@@ -48,12 +48,13 @@ const VideoPlayer = () => {
 
   const sendTimeSpent = async (timeSpent) => {
     try {
+      const time = Math.round(timeSpent)
       await axios.post('https://abpvlog.onrender.com/v1/timespend/create', {
         userId,
         videoId: Id,
-        timeSpend: timeSpent,
+        timeSpend: time,
       });
-      console.log('Real-time spent sent to backend:', timeSpent);
+      console.log('Real-time spent sent to backend:', time);
     } catch (error) {
       console.error('Error tracking time spent:', error);
     }
