@@ -9,6 +9,7 @@ import { TimeSpendrouter } from "./Routes/TimeSpendRoute.js"
 const app = express()
 dotev.config()
 connectDb()
+const PORT =process.env.PORT || 4000
 app.use(cors({
     origin: 'https://apbvlogs.netlify.app',
 
@@ -21,7 +22,7 @@ app.get("/",(req,res)=>{
     res.send("<h2>Hello App</h2>")
 })
 
-app.listen("4000",()=>{
+app.listen(PORT,()=>{
     console.log("App is listen at port 400");
     
 })
