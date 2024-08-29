@@ -10,7 +10,7 @@ const app = express()
 dotev.config()
 connectDb()
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://apbvlogs.netlify.app',
 
 }))
 app.use(express.json())
