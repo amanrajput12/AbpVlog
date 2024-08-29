@@ -117,11 +117,12 @@ function Singup() {
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       console.log('Access Token:', tokenResponse);
-      dispatch(singup(tokenResponse.access_token))
-   
+      dispatch(singup(tokenResponse.access_token));
     },
-    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl ', // Request the YouTube scope
-  }); 
+    redirectUri: 'https://apbvlogs.netlify.app', // This should match the URI in Google Cloud Console
+    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
+  });
+  
   return (
     <>
   <div className="flex flex-col min-h-screen justify-center items-center bg-gray-100">
