@@ -10,8 +10,8 @@ const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [VideoDuration,setVideoDuration] = useState(0)
   const Id = useSelector((store) => store.GetVideo.videoId);
-  const userId = Cookies.get('userId')
-
+  const [userId, setUserId] = useState(Cookies.get('userId'));
+               
   // Calculate required time efficiently outside useEffect
   const calculateRequiredTime = useCallback(() => {
     const videoDuration = playerRef.current?.getDuration() || 0;
