@@ -12,6 +12,7 @@ import Video from './User/Video.jsx';
 import PlayVideo from './User/PlayVideo.jsx';
 import Singup from './Singup/Singup.jsx';
 import TimeSpend from './Admin/TimeSpend.jsx';
+import Register from './Register/Register.jsx';
 const routes = createBrowserRouter([
  
   {
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
       {
         path:"video/play",
         element:<PlayVideo/>
+      },
+      {
+        path:'register',
+        element:<Register/>
       }
     ]
   },

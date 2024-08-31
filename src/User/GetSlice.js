@@ -9,7 +9,8 @@ const GetSlice = createSlice({
     loading:false,
         error:null,
         data:[],
-        videoId:null
+        videoId:null,
+       
     },
     reducers:{
         addvideoId:(state,action)=>{

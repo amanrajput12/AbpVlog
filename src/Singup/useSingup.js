@@ -2,7 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit"
 
 
 
-const fetchUserInfo = async (token) => {
+export const fetchUserInfo = async (token) => {
     try {
       const response = await fetch(
         'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
@@ -24,11 +24,13 @@ const fetchUserInfo = async (token) => {
 
 
 const singup = createAsyncThunk("/user/sigup",async(value)=>{
-    try {
-          const info = await fetchUserInfo(value)        
+    try { 
+      console.log("value in thunk",value);
+       const {token,toast} = value
+          const info = await fetchUserInfo(token)        
             console.log("info",info);
 
-            const resp = await fetch("https://abpvlog.onrender.com/v1/user/register",{
+            const resp = await fetch("http://localhost:4000/v1/user/login",{
                 method:"POST",
                 headers: {
                   'Content-Type': 'application/json',
@@ -36,11 +38,15 @@ const singup = createAsyncThunk("/user/sigup",async(value)=>{
                 body:JSON.stringify({
                   email:info.email,
                   name:info.name,
-                  acessToken:value
+                  acessToken:token
                 })
               })
               const data = await resp.json()
               console.log("on register",data);
+              if(data.message == "user Login sucess"){
+                toast.success(data.message)
+              }
+            
                  return data
          
     } catch (error) {

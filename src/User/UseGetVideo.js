@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const GetVideo = createAsyncThunk("/video/Userdata",async function(value){
     try {
-         const resp = await fetch("https://abpvlog.onrender.com/v1/Video/getVideo",{
+         const resp = await fetch("http://localhost:4000/v1/Video/getVideo",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

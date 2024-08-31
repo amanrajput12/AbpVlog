@@ -2,55 +2,52 @@ import { createSlice } from "@reduxjs/toolkit";
 import signup from "./useSingup.js";
 import Cookies from "js-cookie";
 
+
 const SignupSlice = createSlice({
   name: "user",
   initialState: {
     loading: false,
     error: null,
     data: {},
+    sucess:false
   },
-  reducers: {},
+  reducers: {
+    logout:(state,action)=>{
+      state.sucess = false
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signup.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(signup.fulfilled, (state, action) => {
-        console.log('Action Payload:', action.payload);
 
-        const accessToken = action.payload?.data?.acessToken;
-        const Id = action.payload.data._id;
-        const userRole = action?.payload?.data?.role;
+.addCase(signup.fulfilled,(state,action)=>{
+  const value = new Date(Date.now() + 55 * 60 * 1000)
+  state.loading=false,
+  state.data=action.payload,
+  state.error=null,
+    //  const accessToken = action.payload?.data?.acessToken,
+    //      const userRole = action?.payload?.data?.role;
+    //      const usergetId = action?.payload?.userId;
+    Cookies.set('myid',action?.payload?.userId,{expires:value})
+     Cookies.set('accessToken', action.payload?.data?.acessToken, { expires:value });
+   
+     if (action?.payload?.data?.role === "admin") {
+      Cookies.set('userRole', action?.payload?.data?.role, { expires:value });
+     }
+     state.sucess=true
+})
 
-        console.log('AccessToken:', accessToken);
-        console.log('UserId:', Id);
-        console.log('UserRole:', userRole);
-
-        if (!(accessToken && Id)) {
-          console.error("Access token or user ID not found in payload.");
-          return;
-        }
-
-        // Convert 55 minutes to a fraction of a day (55/1440)
-        const expires = 55 / 1440;
-
-        // Set cookies with the correct expiration time
-        Cookies.set('myid',Id,{expires:4})
-        Cookies.set('accessToken', accessToken, { expires });
-     
-        if (userRole === "admin") {
-          Cookies.set('userRole', userRole, { expires });
-        }
-
-        state.loading = false;
-        state.data = action.payload;
-      })
       .addCase(signup.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
-  },
+       },
 });
+
+
+export const {logout} = SignupSlice.actions
 
 export default SignupSlice.reducer;

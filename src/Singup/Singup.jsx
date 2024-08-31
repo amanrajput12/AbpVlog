@@ -1,44 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import singup from './useSingup';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { Register } from './Register.js';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Singup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(Cookies.get('accessToken'));
   const [userId, setUserId] = useState(Cookies.get('myid'));
+  const acess = useSelector((store)=>store.user.sucess)
 
   useEffect(() => {
     if (accessToken && userId) {
       navigate('/video');
     }
-  }, [accessToken, userId, navigate]);
+  }, [accessToken, userId, navigate,]);
 
+useEffect(()=>{
+    if(acess){
+      navigate('/video')
+    }
+},[acess])
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      const { access_token } = tokenResponse;
-      dispatch(singup(access_token)).then(() => {
-        // After successful signup, set the tokens to state and cookies
-        Cookies.set('accessToken', access_token);
-        setAccessToken(access_token);
-        // Fetch or set the user ID similarly if it's part of the login process
-        // Assume userId is returned from the signup process and saved in state
-        const newUserId = 'someUserId'; // Replace with actual userId from the response
-        Cookies.set('userId', newUserId);
-        setUserId(newUserId);
-      });
+      console.log('Access Token:', tokenResponse);
+      dispatch(singup({token:tokenResponse.access_token,toast}))
+   
     },
-    redirectUri: 'https://apbvlogs.netlify.app',
-    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
-  });
+    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl ', // Request the YouTube scope
+  }); 
 
+
+  const handleRegister = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log('Access Token for register:', tokenResponse);
+      dispatch(Register({token:tokenResponse.access_token,toast}))
+   
+    },
+    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl ', // Request the YouTube scope
+  }); 
   return (
     <>
-      <div className="flex flex-col min-h-screen justify-center items-center bg-gray-100">
-        <div className="bg-white shadow-md flex flex-col justify-center xl:shadow-2xl p-8 xl:max-w-2xl xl:h-[50vh] rounded-3xl w-full transition-shadow duration-300">
+      <div className="flex flex-col  rounded-xl min-h-[80vh]  justify-center items-center bg-gradient-to-r from-slate-200 to-gray-1000">
+        <div className="bg-slate-200 shadow-md flex flex-col justify-center xl:shadow-2xl p-8 xl:max-w-2xl xl:h-[50vh] rounded-3xl w-full transition-shadow duration-300">
           <div className="text-center mb-6">
             <h1 className="text-3xl font-bold text-gray-800">Welcome Back!</h1>
             <p className="text-gray-600">Sign in to continue</p>
@@ -59,14 +67,15 @@ function Singup() {
 
           <div className="mt-6 text-center">
             <p className="text-gray-600">
-              Don't have an account? <a href="#" className="text-blue-600 hover:underline">Sign up</a>
+              Don't have an account? <a onClick={handleRegister}  className="text-blue-600 hover:underline">Sign up</a>
             </p>
           </div>
         </div>
 
-        <footer className="mt-8 text-center text-gray-500 text-sm">
+        <footer onClick={()=>toast.error("Click in the footer")} className="mt-8 text-center text-gray-500 text-sm">
           &copy; 2024 YourCompany. All rights reserved.
         </footer>
+        <Toaster />
       </div>
     </>
   );
