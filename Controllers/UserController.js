@@ -46,7 +46,7 @@ export const register = async function (req,res) {
 }
 
 
-export const login = async function (req,res) {
+export const login = async function(req,res) {
     try {
         const {email,name,acessToken} = req.body
         console.log("email",req.body);

@@ -25,12 +25,20 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     },
+    isrefrence:{
+        type:Boolean,
+        default:false
+    },
    
     references: [
         {
             type: String,
         }
     ],
+    authId:{
+        type:String,
+        default:null
+    }
 });
 
 const User = mongoose.model("User", UserSchema);
