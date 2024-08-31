@@ -12,19 +12,20 @@ export const register = async function (req,res) {
             })
         }
         const alreadyuser = await User.findOne({email})
-        console.log(alreadyuser);
-        
+             
         if(alreadyuser){
-            const value  = await User.findOneAndUpdate({email},{acessToken:acessToken})
-            return  res.status(201).json({
-                message:"user Login sucess",
-                data:value
+            return res.status(401).json({
+                message:'This user Already Exist',
+                sucess:false
             })
         }
+       
         const userdata = await User.create({
             email,
             username:name,
             acessToken,
+            isVerified:false
+            
         })
         if(userdata){
             return res.status(200).json({
@@ -35,6 +36,39 @@ export const register = async function (req,res) {
 
     } catch (error) {
         console.log("error on the register user",error.message);
+        
+    }
+}
+
+
+export const login = async function (req,res) {
+    try {
+        const {email,name,acessToken} = req.body
+        console.log("email",req.body);
+        const alreadyuser = await User.findOne({email})
+        if(!alreadyuser){
+            return res.status(400).json({
+                message:"This user does not exist",
+                sucess:false
+            })
+        }
+        if(alreadyuser){
+            const value  = await User.findOneAndUpdate({email},{acessToken:acessToken})
+            console.log('on resp send',value);
+            
+            return  res.status(200).json({
+                message:"user Login sucess",
+                data:value,
+                userId:value._id
+            })
+        }
+    } catch (error) {
+        console.log("error on login register");
+        res.status(500).json({
+            message:`Error on Login user`,
+            error:error.message,
+            sucess:false
+        })
         
     }
 }

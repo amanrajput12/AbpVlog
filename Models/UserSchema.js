@@ -10,9 +10,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    accessToken: {
+    acessToken: {
         type: String,
-        // required: true
+        required: true
+    },
+    isVerified:{
+        type:Boolean,
+        default:false,
+        required:true
     },
     role: {
         type: String,
@@ -20,12 +25,7 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     },
-    team: [
-        {
-            type: String,
-            ref: 'User',
-        }
-    ],
+   
     references: [
         {
             type: String,
