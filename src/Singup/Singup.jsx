@@ -13,6 +13,7 @@ function Singup() {
   const [accessToken, setAccessToken] = useState(Cookies.get('accessToken'));
   const [userId, setUserId] = useState(Cookies.get('myid'));
   const acess = useSelector((store)=>store.user.sucess)
+  const register = useSelector((store)=>store.Register.register)
 
   useEffect(() => {
     if (accessToken && userId) {
@@ -25,6 +26,11 @@ useEffect(()=>{
       navigate('/video')
     }
 },[acess])
+useEffect(()=>{
+if(register){
+  navigate('/register')
+}
+},[register])
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       console.log('Access Token:', tokenResponse);
