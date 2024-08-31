@@ -36,6 +36,11 @@ export const register = async function (req,res) {
 
     } catch (error) {
         console.log("error on the register user",error.message);
+        res.status(500).json({
+            message:"Error on register the user",
+            sucess:false,
+            error:error.message
+        })
         
     }
 }

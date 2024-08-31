@@ -41,13 +41,18 @@ export const GetVideo = async function(req,res){
     try {
         const getdata = await Video.find({ startTime: { $lt: time }, endTime:{$gt:time}});
        console.log(getdata);
-       
+              
         res.status(200).json({
             message:"Get Data",
             data:getdata
         })
     } catch (error) {
         console.log("error on getting video");
+        res.status(500).json({
+            message:"Error on getting video ",
+            sucess:false,
+            error:error.message
+        })
         
     }
 }
