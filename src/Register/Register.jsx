@@ -1,78 +1,89 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 const Register = () => {
+  const [userEmail, setUserEmail] = useState('');
+  const [refEmail, setRefEmail] = useState('');
+  const [validId, setValidId] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Create FormData object
+    const formData = new FormData();
+    formData.append('useremail', userEmail);
+    formData.append('refrenceemail', refEmail);
+    if (validId) {
+      formData.append('files', validId); // Use 'files' to match your backend multer setup
+    }
+
+    try {
+      const response = await axios.post('https://abpvlog.onrender.com/v1/refrence/create', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log('Response:', response.data);
+      if(response.data){
+        toast.success("Registation sucess")
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-6 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
-          Register
-        </h2>
-        <form className="space-y-6">
-          {/* User Email */}
+      <div className="max-w-md w-full text-black bg-white p-8 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Register</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label
-              htmlFor="userEmail"
-              className="block text-sm font-medium text-gray-700"
-            >
-              User Email
-            </label>
+            <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">User Email</label>
             <input
               type="email"
               id="userEmail"
               name="userEmail"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter your email"
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
               required
             />
           </div>
 
-          {/* Reference Email */}
           <div>
-            <label
-              htmlFor="refEmail"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Reference Email
-            </label>
+            <label htmlFor="refEmail" className="block text-sm font-medium text-gray-700">Reference Email</label>
             <input
               type="email"
               id="refEmail"
               name="refEmail"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter reference email"
+              value={refEmail}
+              onChange={(e) => setRefEmail(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
               required
             />
           </div>
 
-          {/* Valid ID */}
           <div>
-            <label
-              htmlFor="validId"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Valid ID
-            </label>
+            <label htmlFor="validId" className="block text-sm font-medium text-gray-700">Valid ID</label>
             <input
-              type="text"
+              type="file"
               id="validId"
               name="validId"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Enter your valid ID"
+              onChange={(e) => setValidId(e.target.files[0])}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
               required
             />
           </div>
 
-          {/* Submit Button */}
-          <div>
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Register
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+          >
+            Register
+          </button>
         </form>
       </div>
+      <Toaster/>
     </div>
   );
 };
