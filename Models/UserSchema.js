@@ -38,6 +38,14 @@ const UserSchema = new mongoose.Schema({
     authId:{
         type:String,
         default:null
+    },
+    userPhoto:{
+        type:String,
+        default:null
+    },
+    paymentPhoto:{
+        type:String,
+        default:null
     }
 });
 

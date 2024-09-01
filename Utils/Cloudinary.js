@@ -24,6 +24,7 @@ dotenv.config();
       
     } catch (error) {
         console.log("error on upload the cloudinary",error.message);
+        fs.unlinkSync(file)
     }
 }
 

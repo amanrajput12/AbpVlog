@@ -5,11 +5,13 @@ import { upload } from "../Middleware/Multer.js";
 const Refrencerouter = Router();
 
 Refrencerouter.route('/create').post(
-    upload.single('files'), // Handle single file upload with key 'files'
+    upload.fields([
+        { name: 'userId', maxCount: 1 },
+        { name: 'userPhoto', maxCount: 1 },
+        { name: 'paymentPhoto', maxCount: 1 }
+    ]), // Handle multiple file uploads with specific field names
     (req, res, next) => {
-        console.log('Request received:');
-        console.log(req.body);
-        console.log(req.file.path); // This should now show file details
+        // Proceed to the next middleware or route handler
         next();
     },
     Refrence

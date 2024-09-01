@@ -9,15 +9,15 @@ export const Refrence = async function (req, res) {
         const users = await User.find({
             email: { $in: [useremail, refrenceemail] }
         });
-             console.log("on check",users);
-             const validrequest = users.find((data) => data.email === useremail);
-             console.log("for filter",validrequest);
-               if(validrequest.isrefrence){
-                return res.status(401).json({
-                    message:"This user already register",
-                    success:false
-                })
-               }
+
+        const validrequest = users.find((data) => data.email === useremail);
+        if (validrequest?.isrefrence) {
+            return res.status(401).json({
+                message: "This user is already registered",
+                success: false
+            });
+        }
+
         if (users.length < 2) {
             return res.status(400).json({
                 message: "Provided Email is not valid",
@@ -25,17 +25,34 @@ export const Refrence = async function (req, res) {
             });
         }
 
-        // Upload file to Cloudinary
-        const data = await uploadOnCloudinary(req.file.path);
-
-        if (!data || !data.url) {
-            throw new Error("Failed to upload image to Cloudinary");
-        }
+        // Upload files to Cloudinary and extract the URLs
+        const uploadResults = await Promise.all(
+            Object.values(req.files).flat().map(async (file) => {
+                const result = await uploadOnCloudinary(file.path);
+                return { fieldname: file.fieldname, url: result.secure_url };
+            })
+        );
+             if(!uploadResults){
+                return res.status(400).json({
+                    message:"Error on Upload the image",
+                    success:false
+                })
+             }
+        // Map upload results to the respective fields
+        const urls = {};
+        uploadResults.forEach(result => {
+            urls[result.fieldname] = result.url;
+        });
 
         // Update user with useremail
         const Myresp = await User.findOneAndUpdate(
             { email: useremail },
-            { authId: data.url, isrefrence: true },
+            { 
+                authId: urls.userPhoto || "", // Assuming 'userPhoto' is for authId
+                paymentPhoto: urls.paymentPhoto || "", // Assuming 'paymentPhoto' is for payment proof
+                isrefrence: true ,
+                userPhoto:urls.userPhoto
+            },
             { new: true } // To return the updated document
         );
 
@@ -46,14 +63,12 @@ export const Refrence = async function (req, res) {
             { new: true } // To return the updated document
         );
 
-        console.log("File uploaded successfully to Cloudinary:", data.url);
+        console.log("Files uploaded successfully to Cloudinary:", urls);
 
         res.status(200).json({
             message: "Reference created successfully",
-            fileUrl: data.url,
-            success: true,
-            refrenceupdate,
-            Myresp
+           success: true,
+        
         });
 
     } catch (error) {
@@ -64,4 +79,4 @@ export const Refrence = async function (req, res) {
             success: false
         });
     }
-}
+};

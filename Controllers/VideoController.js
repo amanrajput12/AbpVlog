@@ -38,6 +38,8 @@ export const AddVideo = async function(req,res){
 export const GetVideo = async function(req,res){
     const time = new Date().toISOString();
     console.log(time);
+    const {email,name,acessToken} = req.body
+    
     try {
         const getdata = await Video.find({ startTime: { $lt: time }, endTime:{$gt:time}});
        console.log(getdata);

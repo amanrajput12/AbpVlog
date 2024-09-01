@@ -17,7 +17,8 @@ const VideoSchema = new mongoose.Schema({
     snippet:{
         type:Object,
         required:true
-    }
+    },
+    
 })
 
 const Video = mongoose.model("Video",VideoSchema)
