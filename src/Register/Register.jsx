@@ -61,7 +61,7 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-6 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full text-black bg-white p-8 rounded-lg shadow-md">
-       <ReactLoading className={`mx-auto ${loading}`} hidden type="balls" color={"#00000"}  height={100} width={100} />
+      <ReactLoading className={`mx-auto ${loading}`} hidden type="balls" color={"#00000"}  height={100} width={100} />
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>

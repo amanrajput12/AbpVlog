@@ -1,70 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import singup from './useSingup';
+import singup from './useSingup.js';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { Register } from './Register.js';
 import toast, { Toaster } from 'react-hot-toast';
 
-function Singup() {
+const LoginSection = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(Cookies.get('accessToken'));
   const [userId, setUserId] = useState(Cookies.get('myid'));
-  const acess = useSelector((store)=>store.user.sucess)
-  const register = useSelector((store)=>store.Register.register)
+  const acess = useSelector((store) => store.user.sucess);
+  const register = useSelector((store) => store.Register.register);
 
   useEffect(() => {
     if (accessToken && userId) {
-      console.log("check in video udefine working");
-      
       navigate('/video');
     }
-  }, [accessToken, userId, navigate,]);
+  }, [accessToken, userId, navigate]);
 
-useEffect(()=>{
-    if(acess){
-      console.log("acess check",acess);
-      
-      navigate('/video')
+  useEffect(() => {
+    if (acess) {
+      navigate('/video');
     }
-},[acess])
-useEffect(()=>{
-if(register){
-  navigate('/register')
-}
-},[register])
+  }, [acess]);
+
+  useEffect(() => {
+    if (register) {
+      navigate('/register');
+    }
+  }, [register]);
+
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      console.log('Access Token:', tokenResponse);
-      dispatch(singup({token:tokenResponse.access_token,toast}))
-   
+      dispatch(singup({ token: tokenResponse.access_token, toast }));
     },
-    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl ', // Request the YouTube scope
-  }); 
-
+    scope:
+      'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
+  });
 
   const handleRegister = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      console.log('Access Token for register:', tokenResponse);
-      dispatch(Register({token:tokenResponse.access_token,toast}))
-   
+      dispatch(Register({ token: tokenResponse.access_token, toast }));
     },
-    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl ', // Request the YouTube scope
-  }); 
-  return (
-    <>
-      <div className="flex flex-col  rounded-xl min-h-[80vh]  justify-center items-center bg-gradient-to-r from-slate-200 to-gray-1000">
-        <div className="bg-slate-200 shadow-md flex flex-col justify-center xl:shadow-2xl p-8 xl:max-w-2xl xl:h-[50vh] rounded-3xl w-full transition-shadow duration-300">
-          <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-gray-800">Welcome Back!</h1>
-            <p className="text-gray-600">Sign in to continue</p>
-          </div>
+    scope:
+      'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
+  });
 
+  return (
+    <div className="relative flex flex-col min-h-[80vh] justify-center items-center ">
+      <div className="bg-gradient-to-r from-gray-800 to-black  rounded-2xl xl:w-[50vw]  p-8 flex flex-col justify-center items-center shadow-lg transition-shadow duration-300 relative overflow-hidden h-[80vh] animate-snakeBorder">
+        
+        <div className="relative z-10 ">
+          <h1 className='text-3xl animate-fade font-bold text-gray-400 text-center mb-6'>BHOMI
+          ADVERTISEMENT  ENTERPRISE</h1>
+          <h2 className="text-xl font-bold text-gray-400 text-center mb-6 ">Welcome Back!</h2>
+          <p className="text-gray-600 text-center mb-6 animate-move">Sign in to continue</p>
           <button
             onClick={() => login()}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-500 transition-colors flex items-center justify-center"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-500 transition-colors flex items-center justify-center outline-none focus:ring-4 focus:ring-blue-300 mb-6"
           >
             <svg className="w-6 h-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
               <path d="M21.35 11.1h-9.4v2.65h5.5c-.25 1.35-.95 2.5-1.95 3.3v2.7h3.15c1.85-1.7 2.9-4.15 2.9-6.95 0-.45-.05-.9-.1-1.35z" />
@@ -74,21 +70,17 @@ if(register){
             </svg>
             Sign in with Google
           </button>
-
-          <div className="mt-6 text-center">
-            <p className="text-gray-600">
-              Don't have an account? <a onClick={handleRegister}  className="text-blue-600 hover:underline">Sign up</a>
-            </p>
-          </div>
+          <p className="text-gray-400 text-center">
+            Don't have an account?{' '}
+            <a onClick={handleRegister} className="text-blue-600 hover:underline cursor-pointer">
+              Sign up
+            </a>
+          </p>
         </div>
-
-        <footer onClick={()=>toast.error("Click in the footer")} className="mt-8 text-center text-gray-500 text-sm">
-          &copy; 2024 YourCompany. All rights reserved.
-        </footer>
-        <Toaster />
       </div>
-    </>
+      <Toaster />
+    </div>
   );
-}
+};
 
-export default Singup;
+export default LoginSection;
