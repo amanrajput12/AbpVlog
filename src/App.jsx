@@ -35,7 +35,7 @@ const App = () => {
           Dashboard Admin
         </button>
       )}
-      {accessToken!=="undefined" && userId!=="undefined" &&  (
+      {accessToken!=="undefined" && userId!=="undefined" &&  accessToken && userId && (
         <button
           onClick={handleLogout}
           className="p-2 rounded-md bg-blue-700"
