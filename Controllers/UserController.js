@@ -30,7 +30,8 @@ export const register = async function (req,res) {
         if(userdata){
             return res.status(200).json({
                 message:"User created Sucessfully",
-                data:userdata
+                data:userdata,
+                sucess:true
             })
         }
 

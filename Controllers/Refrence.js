@@ -9,10 +9,18 @@ export const Refrence = async function (req, res) {
         const users = await User.find({
             email: { $in: [useremail, refrenceemail] }
         });
-
+             console.log("on check",users);
+             const validrequest = users.find((data) => data.email === useremail);
+             console.log("for filter",validrequest);
+               if(validrequest.isrefrence){
+                return res.status(401).json({
+                    message:"This user already register",
+                    success:false
+                })
+               }
         if (users.length < 2) {
             return res.status(400).json({
-                message: "One or both emails do not exist in the database",
+                message: "Provided Email is not valid",
                 success: false
             });
         }
