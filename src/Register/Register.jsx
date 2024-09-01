@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
   const [userEmail, setUserEmail] = useState('');
   const [refEmail, setRefEmail] = useState('');
   const [validId, setValidId] = useState(null);
-
+     const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,10 +31,14 @@ const Register = () => {
       else if (response.message == "Provided Email is not valid"){
         toast.error(response.message)
       }
+      else if (response.message == "Reference created successfully"){
+        toast.success(response.message)
+      }
     } catch (error) {
       console.error('Error:', error);
 
       toast.error(error.response.data.message)
+      navigate('/')
     }
   };
 
