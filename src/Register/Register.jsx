@@ -18,17 +18,22 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('https://abpvlog.onrender.com/v1/refrence/create', formData, {
+      const response = await axios.post('http://localhost:4000/v1/refrence/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
       console.log('Response:', response.data);
-      if(response.data){
+      if(response.success){
         toast.success("Registation sucess")
+      }
+      else if (response.message == "Provided Email is not valid"){
+        toast.error(response.message)
       }
     } catch (error) {
       console.error('Error:', error);
+
+      toast.error(error.response.data.message)
     }
   };
 
