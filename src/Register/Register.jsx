@@ -17,7 +17,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-        setLoading(flex)
+        setLoading("flex")
     // Create FormData object
     const formData = new FormData();
     formData.append('useremail', userEmail);
