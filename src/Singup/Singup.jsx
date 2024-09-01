@@ -17,12 +17,16 @@ function Singup() {
 
   useEffect(() => {
     if (accessToken && userId) {
+      console.log("check in video udefine working");
+      
       navigate('/video');
     }
   }, [accessToken, userId, navigate,]);
 
 useEffect(()=>{
     if(acess){
+      console.log("acess check",acess);
+      
       navigate('/video')
     }
 },[acess])

@@ -1,4 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit"
+import toast from "react-hot-toast";
 
 
 
@@ -30,7 +31,7 @@ const singup = createAsyncThunk("/user/sigup",async(value)=>{
           const info = await fetchUserInfo(token)        
             console.log("info",info);
 
-            const resp = await fetch("https://abpvlog.onrender.com/v1/user/login",{
+            const resp = await fetch("http://localhost:4000/v1/user/login",{
                 method:"POST",
                 headers: {
                   'Content-Type': 'application/json',
@@ -46,11 +47,14 @@ const singup = createAsyncThunk("/user/sigup",async(value)=>{
               if(data.message == "user Login sucess"){
                 toast.success(data.message)
               }
-            
+              else if(data.message == "This user does not exist"){
+                toast.error(`${data.message} Please Sign Up`)
+              }
                  return data
          
     } catch (error) {
-        console.log("error on sigup the user",error.message);
+        console.log("error on sigup the user",error);
+       
         
     }
 })

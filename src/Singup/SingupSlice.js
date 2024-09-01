@@ -37,7 +37,9 @@ const SignupSlice = createSlice({
      if (action?.payload?.data?.role === "admin") {
       Cookies.set('userRole', action?.payload?.data?.role, { expires:value });
      }
+     if(action.payload.sucess){
      state.sucess=true
+     }
 })
 
       .addCase(signup.rejected, (state, action) => {

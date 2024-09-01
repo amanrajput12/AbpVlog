@@ -8,7 +8,7 @@ export const Register = createAsyncThunk("/user/Register",async function (value)
         const info = await fetchUserInfo(token)        
           console.log("info",info);
 
-          const resp = await fetch("https://abpvlog.onrender.com/v1/user/register",{
+          const resp = await fetch("http://localhost:4000/v1/user/register",{
             method:"POST",
             headers: {
               'Content-Type': 'application/json',

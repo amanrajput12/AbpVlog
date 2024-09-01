@@ -51,7 +51,7 @@ const VideoPlayer = () => {
       console.log("userId",userId);
       
       const time = Math.round(timeSpent)
-      await axios.post('https://abpvlog.onrender.com/v1/timespend/create', {
+      await axios.post('http://localhost:4000/v1/timespend/create', {
         userId,
         videoId: Id,
         timeSpend: time,
