@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { logout } from '../Singup/SingupSlice';
+import logo from '../../public/logo.jpeg'
 
 const Header = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Header = () => {
     <header className=" sticky top-0  z-10 bg-gray-800 shadow-lg    w-screen">
         <div className='flex h-20 items-center justify-between '>
       <div className=" ml-4 text-white text-2xl font-bold cursor-pointer" >
-           <img className='w-12 rounded-md' src="../../public/logo.jpeg" alt="" />
+           <img className='w-12 rounded-md' src={logo} alt="" />
           
       </div>
  
