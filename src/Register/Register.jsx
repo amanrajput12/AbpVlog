@@ -18,7 +18,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:4000/v1/refrence/create', formData, {
+      const response = await axios.post('https://abpvlog.onrender.com/v1/refrence/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -38,8 +38,8 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-6 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full text-black bg-white p-8 rounded-lg shadow-md">
+    <div className="min-h-screen flex items-center justify-center  py-2 px-2 sm:px-6 lg:px-8">
+      <div className=" xl:w-[40vw] h-[50vh] text-black bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
