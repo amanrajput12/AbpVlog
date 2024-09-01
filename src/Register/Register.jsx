@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -9,23 +9,30 @@ import ReactLoading from 'react-loading';
 const Register = () => {
   const [userEmail, setUserEmail] = useState('');
   const [refEmail, setRefEmail] = useState('');
-  const [validId, setValidId] = useState(null);
-  const [loading,setLoading] = useState(null) ;
-   const navigate = useNavigate();
-    const dispatch = useDispatch()
-  
-
+  const [userId, setUserId] = useState(null);  // This should be a text input
+  const [userPhoto, setUserPhoto] = useState(null);
+  const [paymentPhoto, setPaymentPhoto] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+       
   const handleSubmit = async (e) => {
     e.preventDefault();
-        setLoading("flex")
+    setLoading("flex");
+
     // Create FormData object
     const formData = new FormData();
     formData.append('useremail', userEmail);
     formData.append('refrenceemail', refEmail);
-    if (validId) {
-      formData.append('files', validId); // Use 'files' to match your backend multer setup
+    formData.append('userId', userId); // Append userId as text, not as file
+    if (userPhoto) {
+      formData.append('userPhoto', userPhoto);
     }
-
+    if (paymentPhoto) {
+      formData.append('paymentPhoto', paymentPhoto);
+    } 
+    console.log(formData);
+        
     try {
       const response = await axios.post('https://abpvlog.onrender.com/v1/refrence/create', formData, {
         headers: {
@@ -37,35 +44,33 @@ const Register = () => {
 
       if (response.data.success) {
         toast.success('Registration successful');
-        // Use a timeout to ensure the toast is visible before redirecting
-        setLoading(null)
+        setLoading(null);
         setTimeout(() => {
-               dispatch(RegisterSucess())
-            navigate("/")
-        }, 2000); 
+          dispatch(RegisterSucess());
+          navigate("/");
+        }, 2000);
       } else if (response.data.message === 'Provided Email is not valid') {
         toast.error(response.data.message);
       }
     } catch (error) {
       console.error('Error:', error);
-
+      setLoading(null);
       if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
         toast.error('An error occurred. Please try again.');
-        setLoading(null)
       }
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-6 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full text-black bg-white p-8 rounded-lg shadow-md">
-      <ReactLoading className={`mx-auto ${loading}`} hidden type="balls" color={"#00000"}  height={100} width={100} />
+    <div className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
+      <div className="w-[90vw] xl:w-[50vw] text-black bg-white p-8 rounded-lg shadow-md">
+        <ReactLoading className={`mx-auto ${loading}`} hidden type="balls" color={"#00000"} height={100} width={100} />
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">User Email</label>
+            <label htmlFor="userEmail" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">User Email</label>
             <input
               type="email"
               id="userEmail"
@@ -78,7 +83,7 @@ const Register = () => {
           </div>
 
           <div>
-            <label htmlFor="refEmail" className="block text-sm font-medium text-gray-700">Reference Email</label>
+            <label htmlFor="refEmail" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">Reference Email</label>
             <input
               type="email"
               id="refEmail"
@@ -91,14 +96,36 @@ const Register = () => {
           </div>
 
           <div>
-            <label htmlFor="validId" className="block text-sm font-medium text-gray-700">Valid ID</label>
+            <label htmlFor="userId" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">User ID</label>
+            <input
+              type="file"  // Corrected to text input
+              id="userId"
+              name="userId"
+              onChange={(e) =>setUserId(e.target.files[0])}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="userPhoto" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">User Photo</label>
             <input
               type="file"
-              id="validId"
-              name="validId"
-              onChange={(e) => setValidId(e.target.files[0])}
+              id="userPhoto"
+              name="userPhoto"
+              onChange={(e) => setUserPhoto(e.target.files[0])}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="paymentPhoto" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">Payment Photo</label>
+            <input
+              type="file"
+              id="paymentPhoto"
+              name="paymentPhoto"
+              onChange={(e) => setPaymentPhoto(e.target.files[0])}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
             />
           </div>
 
