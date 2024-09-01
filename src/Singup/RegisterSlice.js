@@ -10,7 +10,11 @@ const RegisterSlice = createSlice({
         error:null,
         register:false
     },
-    reducers:{},
+    reducers:{
+        RegisterSucess:(state,action)=>{
+            state.register=false
+        }
+    },
     extraReducers:(builder)=>{
         builder.addCase(Register.pending,(state)=>{
             state.loading=true
@@ -28,4 +32,5 @@ const RegisterSlice = createSlice({
     }
 })
  
+export const {RegisterSucess} = RegisterSlice.actions
 export default RegisterSlice.reducer

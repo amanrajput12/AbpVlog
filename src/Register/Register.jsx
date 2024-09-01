@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { RegisterSucess } from '../Singup/RegisterSlice.js';
+
 const Register = () => {
   const [userEmail, setUserEmail] = useState('');
   const [refEmail, setRefEmail] = useState('');
   const [validId, setValidId] = useState(null);
-     const navigate = useNavigate()
+  const [logout,setLogout] = useState(false)
+  const navigate = useNavigate();
+    const dispatch = useDispatch()
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -21,24 +28,30 @@ const Register = () => {
     try {
       const response = await axios.post('https://abpvlog.onrender.com/v1/refrence/create', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          'Content-Type': 'multipart/form-data',
+        },
       });
+
       console.log('Response:', response.data);
-      if(response.success){
-        toast.success("Registation sucess")
-      }
-      else if (response.message == "Provided Email is not valid"){
-        toast.error(response.message)
-      }
-      else if (response.message == "Reference created successfully"){
-        toast.success(response.message)
+
+      if (response.data.success) {
+        toast.success('Registration successful');
+        // Use a timeout to ensure the toast is visible before redirecting
+        setTimeout(() => {
+               dispatch(RegisterSucess())
+            navigate("/")
+        }, 2000); 
+      } else if (response.data.message === 'Provided Email is not valid') {
+        toast.error(response.data.message);
       }
     } catch (error) {
       console.error('Error:', error);
 
-      toast.error(error.response.data.message)
-      navigate('/')
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('An error occurred. Please try again.');
+      }
     }
   };
 
@@ -93,7 +106,7 @@ const Register = () => {
           </button>
         </form>
       </div>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 };
