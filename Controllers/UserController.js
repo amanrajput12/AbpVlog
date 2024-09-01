@@ -65,7 +65,7 @@ export const login = async function(req,res) {
             return  res.status(200).json({
                 message:"user Login sucess",
                 data:value,
-                userId:value._id
+                userId:value._id,
                 sucess:true
             })
         }
