@@ -4,19 +4,20 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { RegisterSucess } from '../Singup/RegisterSlice.js';
+import ReactLoading from 'react-loading';
 
 const Register = () => {
   const [userEmail, setUserEmail] = useState('');
   const [refEmail, setRefEmail] = useState('');
   const [validId, setValidId] = useState(null);
-  const [logout,setLogout] = useState(false)
-  const navigate = useNavigate();
+  const [loading,setLoading] = useState(null) ;
+   const navigate = useNavigate();
     const dispatch = useDispatch()
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+        setLoading(flex)
     // Create FormData object
     const formData = new FormData();
     formData.append('useremail', userEmail);
@@ -37,6 +38,7 @@ const Register = () => {
       if (response.data.success) {
         toast.success('Registration successful');
         // Use a timeout to ensure the toast is visible before redirecting
+        setLoading(null)
         setTimeout(() => {
                dispatch(RegisterSucess())
             navigate("/")
@@ -51,6 +53,7 @@ const Register = () => {
         toast.error(error.response.data.message);
       } else {
         toast.error('An error occurred. Please try again.');
+        setLoading(null)
       }
     }
   };
@@ -58,6 +61,7 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-6 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full text-black bg-white p-8 rounded-lg shadow-md">
+       <ReactLoading className={`mx-auto ${loading}`} hidden type="balls" color={"#00000"}  height={100} width={100} />
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
