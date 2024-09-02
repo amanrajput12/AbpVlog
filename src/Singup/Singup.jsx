@@ -18,7 +18,7 @@ const LoginSection = () => {
   const [loading,setLoading] = useState(null)
 
   useEffect(() => {
-    if (accessToken && userId) {
+    if (accessToken && userId && accessToken!=="undefined" && userId!=="undefined" ) {
       navigate('/video');
     }
   }, [accessToken, userId, navigate]);

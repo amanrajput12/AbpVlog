@@ -47,7 +47,7 @@ const App = () => {
       <Header />
       <div className="flex items-center flex-col">
         <Outlet />
-        <div className=" xl:absolute p-4  top-[20vh] right-[10vw] animate-none xl:animate-move">
+        <div className=" xl:absolute p-4  top-[20vh] right-[10vw] animate-bounce xl:animate-move">
           <h2 className="text-xl xl:text-3xl  font-extrabold text-gray-300">Current Member</h2>
           <h4 className="text-xl xl:text-4xl text-center font-semibold ">{Math.round(displayMember)}</h4>
         </div>
