@@ -13,6 +13,9 @@ const Register = () => {
   const [userPhoto, setUserPhoto] = useState(null);
   const [paymentPhoto, setPaymentPhoto] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [mobileNumber,setMobileNumber]=useState(null)
+  const [bankAccountNumber,setBankAccountNumber]=useState(null)
+  const [ifscCode,setIfscCode] = useState(null)
   const navigate = useNavigate();
   const dispatch = useDispatch();
        
@@ -25,6 +28,9 @@ const Register = () => {
     formData.append('useremail', userEmail);
     formData.append('refrenceemail', refEmail);
     formData.append('userId', userId); // Append userId as text, not as file
+    formData.append('mobileNumber',mobileNumber)
+    formData.append('bankAccountNumber',bankAccountNumber)
+    formData.append('ifscCode',ifscCode)
     if (userPhoto) {
       formData.append('userPhoto', userPhoto);
     }
@@ -94,6 +100,47 @@ const Register = () => {
               required
             />
           </div>
+
+          <div>
+  <label htmlFor="mobileNumber" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">Mobile Number</label>
+  <input
+    type="number"
+    id="mobileNumber"
+    name="mobileNumber"
+    value={mobileNumber}
+    onChange={(e) => setMobileNumber(e.target.value)}
+    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+    required
+  />
+</div>
+
+<div>
+  <label htmlFor="bankAccountNumber" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">Bank Account Number</label>
+  <input
+    type="text"
+    id="bankAccountNumber"
+    name="bankAccountNumber"
+    value={bankAccountNumber}
+    onChange={(e) => setBankAccountNumber(e.target.value)}
+    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+    required
+  />
+</div>
+
+<div>
+  <label htmlFor="ifscCode" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">IFSC Code</label>
+  <input
+    type="text"
+    id="ifscCode"
+    name="ifscCode"
+    value={ifscCode}
+    onChange={(e) => setIfscCode(e.target.value)}
+    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+    required
+  />
+</div>
+
+        
 
           <div>
             <label htmlFor="userId" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">User ID</label>
