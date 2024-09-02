@@ -8,7 +8,7 @@ export const Register = createAsyncThunk("/user/Register",async function (value)
         const info = await fetchUserInfo(token)        
           console.log("info",info);
 
-          const resp = await fetch("https://abpvlog.onrender.com/v1/user/register",{
+          const resp = await fetch("http://localhost:4000/v1/user/register",{
             method:"POST",
             headers: {
               'Content-Type': 'application/json',
@@ -21,6 +21,9 @@ export const Register = createAsyncThunk("/user/Register",async function (value)
           })
           const data = await resp.json()
           console.log("on login",data);
+          if(!data.success){
+            toast.error(data.message)
+          }
           if(data.message === "This user Already Exist"){
             toast.error(data.message)
           }
@@ -33,6 +36,7 @@ export const Register = createAsyncThunk("/user/Register",async function (value)
              return data
      } catch (error) {
         console.log("error on register user",error.message);
+        toast.error(error.response.data.message)
         
      }
 })

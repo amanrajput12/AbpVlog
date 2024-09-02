@@ -16,13 +16,21 @@ export default {
         },
         fade: {
           '0%': { opacity: '0' },
-        
           '100%': { opacity: '0.9' },
+        },
+        move: {
+          '0%': { transform: 'translate(0, 0)' },
+          '20%': { transform: 'translate(50px, 60px)' },
+          '40%': { transform: 'translate(-30px, 90px)' },
+          '60%': { transform: 'translate(80px, -50px)' },
+          '80%': { transform: 'translate(-60px, -70px)' },
+          '100%': { transform: 'translate(0, 0)' },
         },
       },
       animation: {
         snakeBorder: 'snakeBorder 2s linear infinite',
-        fade: 'fade 2s  linear infinite',
+        fade: 'fade 2s linear infinite',
+        move: 'move 5s linear infinite',
       },
     },
   },

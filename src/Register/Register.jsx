@@ -34,7 +34,7 @@ const Register = () => {
     console.log(formData);
         
     try {
-      const response = await axios.post('https://abpvlog.onrender.com/v1/refrence/create', formData, {
+      const response = await axios.post('http://localhost:4000/v1/refrence/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -66,7 +66,7 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
       <div className="w-[90vw] xl:w-[50vw] text-black bg-white p-8 rounded-lg shadow-md">
-        <ReactLoading className={`mx-auto ${loading}`} hidden type="balls" color={"#00000"} height={100} width={100} />
+        <ReactLoading className={`mx-auto ${loading} sticky top-12 `} hidden type="balls" color={"#00000"} height={100} width={100} />
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>

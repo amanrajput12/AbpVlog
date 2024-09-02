@@ -58,7 +58,7 @@ const LoginSection = () => {
           <h1 className='text-3xl animate-fade font-bold text-gray-400 text-center mb-6'>BHOMI
           ADVERTISEMENT  ENTERPRISE</h1>
           <h2 className="text-xl font-bold text-gray-400 text-center mb-6 ">Welcome Back!</h2>
-          <p className="text-gray-600 text-center mb-6 animate-move">Sign in to continue</p>
+          <p className="text-gray-600 text-center mb-6 animate-fade ">Sign in to continue</p>
           <button
             onClick={() => login()}
             className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-500 transition-colors flex items-center justify-center outline-none focus:ring-4 focus:ring-blue-300 mb-6"

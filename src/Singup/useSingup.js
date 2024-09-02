@@ -54,6 +54,7 @@ const singup = createAsyncThunk("/user/sigup",async(value)=>{
          
     } catch (error) {
         console.log("error on sigup the user",error);
+        toast.error(error.response.data.message)
        
         
     }
