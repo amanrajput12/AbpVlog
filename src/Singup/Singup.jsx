@@ -37,17 +37,18 @@ const LoginSection = () => {
     onSuccess: (tokenResponse) => {
       dispatch(singup({ token: tokenResponse.access_token, toast }));
     },
-    scope:
-      'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
+    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
+    redirectUri: 'https://bae.org.in', // Ensure this matches what’s registered in Google Cloud
   });
-
+  
   const handleRegister = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       dispatch(Register({ token: tokenResponse.access_token, toast }));
     },
-    scope:
-      'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
+    scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
+    redirectUri: 'https://bae.org.in', // Esure this matches what’s registered in Google Cloud
   });
+  
 
   return (
     <div className="relative flex flex-col min-h-[80vh] justify-center items-center ">

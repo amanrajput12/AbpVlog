@@ -60,7 +60,7 @@ const root = createRoot(document.getElementById('root'));
 root.render(
          
          <Provider store={Appstore}>
-   <GoogleOAuthProvider clientId={import.meta.env.VITE_clientId}>
+   <GoogleOAuthProvider clientId={import.meta.env.VITE_clientId} >
   <RouterProvider router={routes} />
     </GoogleOAuthProvider> 
     </Provider>
