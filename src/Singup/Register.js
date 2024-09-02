@@ -32,7 +32,7 @@ export const Register = createAsyncThunk("/user/Register",async function (value)
           }
           else if(data.message === "User created Sucessfully"){
             setLoading(null)
-            toast.success(data.message)
+            // toast.success(data.message)
           }
           else if(data.message === "This user does not exist"){
             toast.error(data.message)
