@@ -3,8 +3,23 @@ import { uploadOnCloudinary } from "../Utils/Cloudinary.js";
 
 export const Refrence = async function (req, res) {
     try {
-        const { useremail, refrenceemail } = req.body;
+        const { useremail, refrenceemail,mobileNumber,ifscCode,bankAccountNumber } = req.body;
 
+         
+        const userId = req.files.userId[0].path;
+     const userPhoto =req.files.userPhoto[0].path;
+     const  paymentPhoto=  req.files.paymentPhoto[0].path;
+
+     if(!(useremail,refrenceemail,mobileNumber,ifscCode,bankAccountNumber,userId,userPhoto,paymentPhoto)){
+        console.log("all field requird");
+        
+            return res.status(400).json({
+                message:"All Field Are Required",
+                sucess:false
+            })
+     }
+
+    
         // Check if both useremail and refrenceemail exist in the database
         const users = await User.find({
             email: { $in: [useremail, refrenceemail] }
@@ -56,7 +71,10 @@ console.log('Files uploaded successfully to Cloudinary:', urlimage);
                 authId: urlimage.userPhoto || "", // Assuming 'userPhoto' is for authId
                 paymentPhoto: urlimage.paymentPhoto || "", // Assuming 'paymentPhoto' is for payment proof
                 isrefrence: true ,
-                userPhoto:urlimage.userPhoto
+                userPhoto:urlimage.userPhoto,
+                bankAccountNumber,
+                mobileNumber:Number(mobileNumber),
+                ifscCode
             },
         );
 

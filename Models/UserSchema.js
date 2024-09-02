@@ -19,6 +19,18 @@ const UserSchema = new mongoose.Schema({
         default:false,
         required:true
     },
+    ifscCode:{
+        type:String,
+        default:null
+    },
+    bankAccountNumber:{
+        type:String,
+        default:null
+    },
+    mobileNumber: {
+     type:Number,
+     default:null
+    },
     role: {
         type: String,
         required: true,
