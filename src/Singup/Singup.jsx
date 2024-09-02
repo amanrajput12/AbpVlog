@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { Register } from './Register.js';
 import toast, { Toaster } from 'react-hot-toast';
+import ReactLoading from 'react-loading';
 
 const LoginSection = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const LoginSection = () => {
   const [userId, setUserId] = useState(Cookies.get('myid'));
   const acess = useSelector((store) => store.user.sucess);
   const register = useSelector((store) => store.Register.register);
+  const [loading,setLoading] = useState(null)
 
   useEffect(() => {
     if (accessToken && userId) {
@@ -35,7 +37,7 @@ const LoginSection = () => {
 
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      dispatch(singup({ token: tokenResponse.access_token, toast }));
+      dispatch(singup({ token: tokenResponse.access_token, setLoading,toast }));
     },
     scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
     redirectUri: 'https://bae.org.in', // Ensure this matches what’s registered in Google Cloud
@@ -43,7 +45,7 @@ const LoginSection = () => {
   
   const handleRegister = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      dispatch(Register({ token: tokenResponse.access_token, toast }));
+      dispatch(Register({ token: tokenResponse.access_token, toast,setLoading }));
     },
     scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.force-ssl',
     redirectUri: 'https://bae.org.in', // Esure this matches what’s registered in Google Cloud
@@ -53,7 +55,7 @@ const LoginSection = () => {
   return (
     <div className="relative flex flex-col min-h-[80vh] justify-center items-center ">
       <div className="bg-gradient-to-r from-gray-800 to-black  rounded-2xl xl:w-[50vw]  p-8 flex flex-col justify-center items-center shadow-lg transition-shadow duration-300 relative overflow-hidden h-[80vh] animate-snakeBorder">
-        
+      <ReactLoading className={`mx-auto ${loading} sticky top-12 z-30 `} hidden type="balls" color={"#00000"} height={100} width={100} />
         <div className="relative z-10 ">
           <h1 className='text-3xl animate-fade font-bold text-gray-400 text-center mb-6'>BHOMI
           ADVERTISEMENT  ENTERPRISE</h1>
