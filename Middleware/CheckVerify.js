@@ -3,6 +3,11 @@ import { User } from "../Models/UserSchema.js";
 // middleware/checkVerified.js
 export const checkVerified =async(req, res, next) => {
     const userId = req.query
+   return res.status(400).json({
+    message:"Not authorize",
+    sucess:false
+   })
+
         console.log(userId);
         
     if (!userId) {

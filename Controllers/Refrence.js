@@ -24,46 +24,49 @@ export const Refrence = async function (req, res) {
                 success: false
             });
         }
+              console.log(req.files.userId[0].path);
+              console.log(req.files.userPhoto[0].path);
+              console.log(req.files.paymentPhoto[0].path);
 
-        // Upload files to Cloudinary and extract the URLs
-        const uploadResults = await Promise.all(
-            Object.values(req.files).flat().map(async (file) => {
-                const result = await uploadOnCloudinary(file.path);
-                return { fieldname: file.fieldname, url: result.secure_url };
-            })
-        );
-             if(!uploadResults){
+              const resultcloud = await Promise.all([
+                uploadOnCloudinary(req.files.userId[0].path).then(result => ({ fieldname: 'userId', url: result.secure_url })),
+                uploadOnCloudinary(req.files.userPhoto[0].path).then(result => ({ fieldname: 'userPhoto', url: result.secure_url })),
+                uploadOnCloudinary(req.files.paymentPhoto[0].path).then(result => ({ fieldname: 'paymentPhoto', url: result.secure_url })),
+              ]) 
+              console.log("check of result promise",resultcloud);
+
+              if(!resultcloud){
                 return res.status(400).json({
                     message:"Error on Upload the image",
                     success:false
                 })
              }
-        // Map upload results to the respective fields
-        const urls = {};
-        uploadResults.forEach(result => {
-            urls[result.fieldname] = result.url;
-        });
-
+              
+              const urlimage = {};
+              resultcloud.forEach(result => {
+            urlimage[result.fieldname] = result.url;
+});
+console.log('Files uploaded successfully to Cloudinary:', urlimage);
+                
+    
         // Update user with useremail
         const Myresp = await User.findOneAndUpdate(
             { email: useremail },
             { 
-                authId: urls.userPhoto || "", // Assuming 'userPhoto' is for authId
-                paymentPhoto: urls.paymentPhoto || "", // Assuming 'paymentPhoto' is for payment proof
+                authId: urlimage.userPhoto || "", // Assuming 'userPhoto' is for authId
+                paymentPhoto: urlimage.paymentPhoto || "", // Assuming 'paymentPhoto' is for payment proof
                 isrefrence: true ,
-                userPhoto:urls.userPhoto
+                userPhoto:urlimage.userPhoto
             },
-            { new: true } // To return the updated document
         );
 
         // Update user with refrenceemail
         const refrenceupdate = await User.findOneAndUpdate(
             { email: refrenceemail },
             { $push: { references: useremail } }, // Use $push to add to the references array
-            { new: true } // To return the updated document
         );
 
-        console.log("Files uploaded successfully to Cloudinary:", urls);
+        
 
         res.status(200).json({
             message: "Reference created successfully",

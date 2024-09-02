@@ -9,6 +9,7 @@ import { Teamrouter } from "./Routes/TeamRoute.js";
 import { Refrencerouter } from "./Routes/RefrenceRoute.js";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import { Memberrouter } from "./Routes/MemberRoute.js";
 
 const app = express();
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/v1/Video", VideoRouter);
 app.use("/v1/timespend", TimeSpendrouter);
 app.use("/v1/team", Teamrouter);
 app.use("/v1/refrence", Refrencerouter);
+app.use("/v1/member",Memberrouter)
 
 app.get("/", (req, res) => {
     console.log("Monitoring the application");
