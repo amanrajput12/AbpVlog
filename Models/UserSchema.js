@@ -31,6 +31,10 @@ const UserSchema = new mongoose.Schema({
      type:Number,
      default:null
     },
+    referedBy:{
+     type:String,
+     default:null
+    },
     role: {
         type: String,
         required: true,
