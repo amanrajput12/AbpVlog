@@ -4,6 +4,7 @@ import { User } from "../Models/UserSchema.js";
 export const register = async function (req,res) {
     try {
         const {email,name,acessToken} = req.body
+        const Email = email.toLowerCase()
         console.log("email",req.body);
         
         if(!(email,name)){
@@ -11,7 +12,7 @@ export const register = async function (req,res) {
                 message:"Name and email is required"
             })
         }
-        const alreadyuser = await User.findOne({email})
+        const alreadyuser = await User.findOne({Email})
              
         if(alreadyuser){
             return res.status(401).json({
@@ -21,7 +22,7 @@ export const register = async function (req,res) {
         }
        
         const userdata = await User.create({
-            email,
+            email:Email,
             username:name,
             acessToken,
             isVerified:false

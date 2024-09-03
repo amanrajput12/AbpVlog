@@ -4,8 +4,10 @@ import { uploadOnCloudinary } from "../Utils/Cloudinary.js";
 export const Refrence = async function (req, res) {
     try {
         const { useremail, refrenceemail,mobileNumber,ifscCode,bankAccountNumber } = req.body;
-
-         
+            const userEmail = useremail.toLowerCase();
+            const refrenceEmail = refrenceemail.toLowerCase();
+               console.log("email ",userEmail,refrenceEmail);
+               
         const userId = req.files.userId[0].path;
      const userPhoto =req.files.userPhoto[0].path;
      const  paymentPhoto=  req.files.paymentPhoto[0].path;
@@ -22,10 +24,11 @@ export const Refrence = async function (req, res) {
     
         // Check if both useremail and refrenceemail exist in the database
         const users = await User.find({
-            email: { $in: [useremail, refrenceemail] }
+            email: { $in: [userEmail, refrenceEmail] }
         });
-
-        const validrequest = users.find(data => data.email.toLowerCase() === useremail.toLowerCase());
+         
+          
+        const validrequest = users.find(data => data.email === userEmail);
         if (validrequest?.isrefrence) {
             return res.status(401).json({
                 message: "This user is already registered",
@@ -42,7 +45,7 @@ export const Refrence = async function (req, res) {
               console.log(req.files.userId[0].path);
               console.log(req.files.userPhoto[0].path);
               console.log(req.files.paymentPhoto[0].path);
-
+      
               const resultcloud = await Promise.all([
                 uploadOnCloudinary(req.files.userId[0].path).then(result => ({ fieldname: 'userId', url: result.secure_url })),
                 uploadOnCloudinary(req.files.userPhoto[0].path).then(result => ({ fieldname: 'userPhoto', url: result.secure_url })),
@@ -66,7 +69,7 @@ console.log('Files uploaded successfully to Cloudinary:', urlimage);
     
         // Update user with useremail
         const Myresp = await User.findOneAndUpdate(
-            { email: useremail },
+            { email: userEmail },
             { 
                 authId: urlimage.userPhoto || "", // Assuming 'userPhoto' is for authId
                 paymentPhoto: urlimage.paymentPhoto || "", // Assuming 'paymentPhoto' is for payment proof
@@ -80,8 +83,8 @@ console.log('Files uploaded successfully to Cloudinary:', urlimage);
 
         // Update user with refrenceemail
         const refrenceupdate = await User.findOneAndUpdate(
-            { email: refrenceemail },
-            { $push: { references: useremail } }, // Use $push to add to the references array
+            { email: refrenceEmail },
+            { $push: { references: userEmail } }, // Use $push to add to the references array
         );
 
         
