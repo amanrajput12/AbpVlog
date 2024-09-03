@@ -25,7 +25,7 @@ export const Refrence = async function (req, res) {
             email: { $in: [useremail, refrenceemail] }
         });
 
-        const validrequest = users.find((data) => data.email === useremail);
+        const validrequest = users.find(data => data.email.toLowerCase() === useremail.toLowerCase());
         if (validrequest?.isrefrence) {
             return res.status(401).json({
                 message: "This user is already registered",
