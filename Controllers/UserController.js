@@ -82,6 +82,33 @@ export const login = async function(req,res) {
 }
 
 
+export const Forverify = async function (req,res) {
+       try {
+        const userdata = await User.find({isVerified:false});
+        if(userdata){
+            return res.status(200).json({
+                message:"SucessFully get data",
+                sucess:true,
+                data:userdata
+            })
+        }
+
+       } catch (error) {
+        console.log("error on getting user for verify",error.message);
+        res.status(500).json({
+             message:"Error on getting user for verify",
+             sucess:false,
+             error:error.message
+        })
+        
+       }
+}
+
+
+
+
+
+
 
 
 

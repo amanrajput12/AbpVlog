@@ -2,18 +2,16 @@ import { User } from "../Models/UserSchema.js";
 
 // middleware/checkVerified.js
 export const checkVerified =async(req, res, next) => {
-    const userId = req.query
-   return res.status(400).json({
-    message:"Not authorize",
-    sucess:false
-   })
-
-        console.log(userId);
+    const {email} = req.body
+ 
+      console.log("reahed to the middleware");
+      
+        console.log(email);
         
-    if (!userId) {
+    if (!email) {
         return res.status(401).json({ message: 'User not authenticated' });
     }
-     const user = await User.findOne({_id:userId})
+     const user = await User.findOne({email:email})
 
     if (!user.isVerified) {
         return res.status(403).json({ message: 'User is not verified' });

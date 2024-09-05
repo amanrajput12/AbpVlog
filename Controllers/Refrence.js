@@ -78,7 +78,7 @@ console.log('Files uploaded successfully to Cloudinary:', urlimage);
                 bankAccountNumber,
                 mobileNumber:Number(mobileNumber),
                 ifscCode,
-                referedBy:refrenceEmail
+                
             },
         );
 
