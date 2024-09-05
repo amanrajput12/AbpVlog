@@ -7,7 +7,9 @@ export const GetVideo = createAsyncThunk("/video/Userdata",async function(value)
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
-            }
+            },
+            body:JSON.stringify({email:"rajputaman724857@gmail.com"})
+            
          })
 
          const data = await resp.json()

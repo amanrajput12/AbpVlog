@@ -3,6 +3,7 @@ import SingupSlice from "../src/Singup/SingupSlice.js";
 import VideoAddSlice from "../src/Admin/VideoAddSlice.js";
 import GetSlice from "../src/User/GetSlice.js";
 import RegisterSlice from "../src/Singup/RegisterSlice.js";
+import VerifyUserSlice from "../src/Admin/VerifyUserSlice.js";
 
 
 const Appstore = configureStore({
@@ -10,7 +11,8 @@ const Appstore = configureStore({
         user:SingupSlice,
         AddVideo:VideoAddSlice,
         GetVideo:GetSlice,
-        Register:RegisterSlice
+        Register:RegisterSlice,
+        VerifyUser:VerifyUserSlice
     }
 })
 

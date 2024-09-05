@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DateTimePicker from "react-datetime-picker";
+
+
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
+
 import VideoAdd from './useVideoAdd.js';
 import Cookies from "js-cookie"
 const AdminDashboard = () => {
@@ -20,7 +23,7 @@ const AdminDashboard = () => {
 
   async function fetchVideo() {
     try {
-      const data = await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCjICW5kTfJa0Kqgt5WOP2cA&maxResults=50&type=video", {
+      const data = await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCK8sQmJBp8GCxrOtXWBpyEA&maxResults=50&type=video", {
         method:"GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -35,7 +38,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="p-4 bg-gray-900 min-h-screen  text-white">
+    <div className="p-4 bg-gray-900 text-white">
       <h2 className="text-xl font-bold mb-4">Admin Dashboard</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {data?.map((data) => (
@@ -48,7 +51,7 @@ const AdminDashboard = () => {
                 id="startTime"
                 onChange={(e) => SetStartTime(e)}
                 value={startTime}
-                className="mt-1 block w-full bg-gray-700 text-white"
+                 className="text-orange-500"
               />
             </div>
             <div className="mb-4">
@@ -57,7 +60,7 @@ const AdminDashboard = () => {
                 id="endTime"
                 onChange={(e) => SetEndTime(e)}
                 value={endTime}
-                className="mt-1 block w-full bg-gray-700 text-white"
+               className="text-orange-500"
               />
             </div>
             <button

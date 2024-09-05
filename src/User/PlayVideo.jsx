@@ -51,7 +51,7 @@ const VideoPlayer = () => {
       console.log("userId",userId);
       
       const time = Math.round(timeSpent)
-      await axios.post('https://abpvlog.onrender.com/v1/timespend/create', {
+      await axios.post('http://localhost:4000/v1/timespend/create', {
         userId,
         videoId: Id,
         timeSpend: time,
@@ -91,8 +91,8 @@ const VideoPlayer = () => {
         onPlay={handlePlay}
         onPause={handlePause}
         onEnded={handleEnded}
-        width="100%"
-        height="50vh"
+        width="80vw"
+        height="80vh"
         className="rounded-lg overflow-hidden"
       />
     </div>

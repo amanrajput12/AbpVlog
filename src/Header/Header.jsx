@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className=" sticky top-0  z-10 bg-gray-800 shadow-lg    w-screen">
+    <header className=" sticky top-0  z-10 bg-gray-800 shadow-lg p-3">
         <div className='flex h-20 items-center justify-between '>
       <div className=" ml-4 text-white text-2xl font-bold cursor-pointer" >
            <img className='w-12 rounded-md' src={logo} alt="" />
@@ -31,7 +31,7 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         {userRole == 'admin' && (
           <button
-            onClick={() => navigate('/admin/dashboard')}
+            onClick={() => navigate('/admin')}
             className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition-colors"
           >
             Admin Dashboard

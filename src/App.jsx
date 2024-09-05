@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header/Header.jsx';
 import Footer from './Footer/Footer.jsx';
 import LoginSection from './Singup/Singup.jsx';
@@ -8,6 +8,12 @@ const App = () => {
   const [actualMember, setActualMember] = useState(null);
   const [displayMember, setDisplayMember] = useState(0);
 
+     const location = useLocation() 
+     const isHomeRoute = location.pathname === '/';
+       
+   
+   
+     
   useEffect(() => {
     async function getMember() {
       try {
@@ -43,14 +49,17 @@ const App = () => {
   }, [actualMember]);
 
   return (
-    <div className="bg-black min-h-screen max-w-[100vw] text-white flex flex-col">
+    <div className=" bg-black min-h-screen max-w-[100vw] text-white flex flex-col">
+    
       <Header />
       <div className="flex items-center flex-col">
         <Outlet />
+        {isHomeRoute && 
         <div className=" xl:absolute p-4  top-[20vh] right-[10vw] animate-bounce xl:animate-move">
           <h2 className="text-xl xl:text-3xl  font-extrabold text-gray-300">Current Member</h2>
           <h4 className="text-xl xl:text-4xl text-center font-semibold ">{Math.round(displayMember)}</h4>
         </div>
+        }
       </div>
       <Footer />
     </div>

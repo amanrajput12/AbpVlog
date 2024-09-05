@@ -13,6 +13,8 @@ import PlayVideo from './User/PlayVideo.jsx';
 import Singup from './Singup/Singup.jsx';
 import TimeSpend from './Admin/TimeSpend.jsx';
 import Register from './Register/Register.jsx';
+import VerifyUser from './Admin/VerifyUser.jsx';
+import ShowImage from './Admin/ShowImage.jsx';
 const routes = createBrowserRouter([
  
   {
@@ -42,6 +44,14 @@ const routes = createBrowserRouter([
       path:"/admin",
       element:<Admin/>,
       children:[
+        {
+          path:"",
+          element:<VerifyUser/>
+        },
+        {
+          path:"check",
+          element:<ShowImage/>
+        },
         {
           path: "dashboard",
           element:<AdminDashboard/>,
