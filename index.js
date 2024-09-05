@@ -31,7 +31,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/v1/user", Userrouter);
 app.use("/v1/Video", VideoRouter);
 app.use("/v1/timespend", TimeSpendrouter);
-// app.use("/v1/team", Teamrouter);
 app.use("/v1/refrence", Refrencerouter);
 app.use("/v1/member",Memberrouter)
 app.use('/v1/admin',Adminrouter)

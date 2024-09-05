@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema({
         type:String,
         default:null
     },
+    gradepay:{
+    type:Number,
+    default:null
+    },
     mobileNumber: {
      type:Number,
      default:null
