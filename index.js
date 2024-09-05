@@ -5,7 +5,7 @@ import { Userrouter } from "./Routes/UserRoute.js";
 import cors from "cors";
 import { VideoRouter } from "./Routes/VideoRoute.js";
 import { TimeSpendrouter } from "./Routes/TimeSpendRoute.js";
-import { Teamrouter } from "./Routes/TeamRoute.js";
+
 import { Refrencerouter } from "./Routes/RefrenceRoute.js";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
