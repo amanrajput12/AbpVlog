@@ -1,5 +1,6 @@
 import { TimeSpend } from "../Models/TimeSpend.js";
 import { Video } from "../Models/VideoSchema.js";
+import { AddWallet } from "./AddWallet.js";
 
 // Create TimeSpend
 export const CreateTimespend = async function (req, res) {
@@ -10,15 +11,17 @@ export const CreateTimespend = async function (req, res) {
       let record = await TimeSpend.findOne({ userId, videoId });
   
       if (record) {
-        // Update the existing record
-        record.timeSpend += timeSpend;
-        record.lastWatched = Date.now();
+        return res.status(400).json({
+          message:"Already watch"
+        })
+        
       } else {
         // Create a new record
         record = new TimeSpend({ userId, videoId, timeSpend });
       }
   
       await record.save();
+      AddWallet(userId,timeSpend)
       res.status(200).json({ success: true, data: record });
     } catch (error) {
         console.log("error on the timespend created",error.message);
