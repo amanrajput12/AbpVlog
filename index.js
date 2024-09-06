@@ -11,6 +11,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { Memberrouter } from "./Routes/MemberRoute.js";
 import { Adminrouter } from "./Routes/AdminRoute.js";
+import { Walletrouter } from "./Routes/WalletRoute.js";
 
 
 const app = express();
@@ -34,6 +35,7 @@ app.use("/v1/timespend", TimeSpendrouter);
 app.use("/v1/refrence", Refrencerouter);
 app.use("/v1/member",Memberrouter)
 app.use('/v1/admin',Adminrouter)
+app.use("/v1/wallet",Walletrouter)
 
 app.get("/", (req, res) => {
     console.log("Monitoring the application");

@@ -24,7 +24,7 @@ export const currentMember = async function (req, res) {
 export const IncreaseMember = async function () {
     try {
        
-        const result = await CurrentMember.updateOne({}, { $inc: { Member: 3000 } });
+        const result = await CurrentMember.updateOne({}, { $inc: { Member: 327 } });
 
         if (result.modifiedCount > 0) {
             console.log("Member count increased by 2000");

@@ -21,7 +21,9 @@ export const CreateTimespend = async function (req, res) {
       }
   
       await record.save();
-      AddWallet(userId,timeSpend)
+     const wallet = await  AddWallet(userId,timeSpend)
+     console.log("balance in the wallet ",wallet);
+     
       res.status(200).json({ success: true, data: record });
     } catch (error) {
         console.log("error on the timespend created",error.message);
