@@ -5,7 +5,7 @@ const VideoAdd = createAsyncThunk("/Admin/AddVideo",async function(value){
     try {
             console.log("value",value); 
             const {startTime,endTime,id,snippet} = value
-            const resp = await fetch("https://abpvlog.onrender.com/v1/Video/admin/add",{
+            const resp = await fetch("/v1/Video/admin/add",{
                 method:"POST",
                 headers: {
                   'Content-Type': 'application/json',

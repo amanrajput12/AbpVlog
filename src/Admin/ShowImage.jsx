@@ -15,7 +15,7 @@ const ShowImage = () => {
 
     if (result) {
       setloading("flex");
-      const data = await fetch(`https://abpvlog.onrender.com/v1/admin/profileverify`, {
+      const data = await fetch(`/v1/admin/profileverify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
