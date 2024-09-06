@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     async function getMember() {
       try {
-        const response = await fetch("https://abpvlog.onrender.com/v1/member/get", {
+        const response = await fetch("/v1/member/get", {
           method: "GET",
         });
         const data = await response.json();
