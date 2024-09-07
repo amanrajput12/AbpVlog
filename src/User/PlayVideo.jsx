@@ -51,12 +51,20 @@ const VideoPlayer = () => {
       console.log("userId",userId);
       
       const time = Math.round(timeSpent)
-      await axios.post('/v1/timespend/create', {
-        userId,
-        videoId: Id,
-        timeSpend: time,
-      });
-      console.log('Real-time spent sent to backend:', time);
+   
+      const data = await fetch("/v1/timespend/create",{
+        method:"POST",
+        headers:{
+           "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          userId,
+          videoId: Id,
+          timeSpend: time,
+        })
+      })
+      const resp = await data.json()
+      console.log('Real-time spent sent to backend:', time,resp);
     } catch (error) {
       console.error('Error tracking time spent:', error);
     }
@@ -82,7 +90,7 @@ const VideoPlayer = () => {
   };
 
   return (
-    <div className="relative bg-gray-900 p-4 rounded-lg shadow-lg">
+    <div className="flex justify-center bg-gray-900 p-4 min-h-screen rounded-lg shadow-lg">
       <ReactPlayer
         ref={playerRef}
         url={`https://www.youtube.com/watch?v=${Id}`}
@@ -91,7 +99,7 @@ const VideoPlayer = () => {
         onPlay={handlePlay}
         onPause={handlePause}
         onEnded={handleEnded}
-        width="80vw"
+        width="90vw"
         height="80vh"
         className="rounded-lg overflow-hidden"
       />

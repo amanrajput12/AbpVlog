@@ -4,7 +4,8 @@ import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { logout } from '../Singup/SingupSlice';
 import logo from '../../public/logo.jpeg'
-import { LuBoxSelect } from "react-icons/lu";
+
+import { BiAbacus } from "react-icons/bi";
 import Loginbtn from '../Buttons/Loginbtn';
 import Signupbtn from '../Buttons/Signupbtn';
 
@@ -34,7 +35,9 @@ const Header = () => {
       isHomeRoute ? 'bg-gray-950' : 'bg-gray-800'
     } shadow-lg p-3 ${isHomeRoute ? 'text-white' : 'text-black'}`}
   >
+
         <div className='flex  h-20 items-centr justify-around  items-center '>
+   
 
 
 
@@ -61,8 +64,9 @@ const Header = () => {
           </div>
         }
         
+      
          {accessToken!=="undefined" && userId!=="undefined" &&  accessToken && userId && <div>
-<LuBoxSelect onClick={()=>setBtnToogle(!btntoogle)}  className='w-[100px] h-[30px] hover:cursor-pointer  ' />
+<BiAbacus onClick={()=>setBtnToogle(!btntoogle)}  className='w-[100px] text-slate-200 h-[30px] hover:cursor-pointer  ' />
 
 {btntoogle &&
          <div className=' bg-black mt-1 p-2 rounded-lg    w-24 justify-end absolute '>

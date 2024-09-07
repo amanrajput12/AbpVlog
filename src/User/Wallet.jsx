@@ -46,7 +46,7 @@ const Wallet = () => {
   }
 
   if (error) {
-    return <p className="text-center text-lg font-medium text-red-500">{error}</p>;
+    return <p className="text-center text-lg font-medium text-red-500 min-h-screen flex justify-center items-center ">{error? "Your wallet is Not created  contact Admin ":""}</p>;
   }
 
   return (
@@ -70,7 +70,7 @@ const Wallet = () => {
             </div>
           </div>
         ) : (
-          <p className="text-gray-600">No wallet data available</p>
+          <p className="text-gray-600   ">No wallet data available</p>
         )}
 
         {/* Wallet Card Animation */}

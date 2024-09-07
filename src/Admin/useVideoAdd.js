@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 const VideoAdd = createAsyncThunk("/Admin/AddVideo",async function(value){
     try {
             console.log("value",value); 
-            const {startTime,endTime,id,snippet} = value
+            const {startTime,endTime,id,snippet,toast,userId} = value
             const resp = await fetch("/v1/Video/admin/add",{
                 method:"POST",
                 headers: {
@@ -14,12 +14,16 @@ const VideoAdd = createAsyncThunk("/Admin/AddVideo",async function(value){
                     startTime,
                   endTime,
                   id,
-                  snippet
+                  snippet,
+                  userId
                
                 })
               })
               const data = await resp.json()
               console.log("on video upload",data);
+              if(data){
+                toast.success("Video Added Sucessfully")
+              }
                  return data
 
 

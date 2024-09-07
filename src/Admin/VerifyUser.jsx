@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { VerifyUserData } from "./VerifyUserData";
 import { userVerfication, viewImage } from "./VerifyUserSlice";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"
 
 const VerifyUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.VerifyUser);
+  const [userId, setUserId] = useState(Cookies.get('myid'));
 
   useEffect(() => {
-    dispatch(VerifyUserData());
+    dispatch(VerifyUserData(userId));
   }, [dispatch]);
 
   return (

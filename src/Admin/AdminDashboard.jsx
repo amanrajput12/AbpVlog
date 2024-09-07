@@ -9,8 +9,10 @@ import 'react-clock/dist/Clock.css';
 
 import VideoAdd from './useVideoAdd.js';
 import Cookies from "js-cookie"
+import toast, { Toaster } from 'react-hot-toast';
 const AdminDashboard = () => {
   const token = Cookies.get("accessToken");
+  const [userId, setUserId] = useState(Cookies.get('myid'));
   const [data, setData] = useState(null);
   const [startTime, SetStartTime] = useState(null);
   const [endTime, SetEndTime] = useState(null);
@@ -64,7 +66,7 @@ const AdminDashboard = () => {
               />
             </div>
             <button
-              onClick={() => dispatch(VideoAdd({ startTime, endTime, id: data.id.videoId, snippet: data.snippet }))}
+              onClick={() => dispatch(VideoAdd({ startTime, endTime, id: data.id.videoId, snippet: data.snippet ,toast,userId}))}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             >
               Upload
@@ -72,6 +74,7 @@ const AdminDashboard = () => {
           </div>
         ))}
       </div>
+      <Toaster/>
     </div>
   );
 };

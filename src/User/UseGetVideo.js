@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const GetVideo = createAsyncThunk("/video/Userdata",async function(value){
+export const GetVideo = createAsyncThunk("/video/Userdata",async function(userId){
     try {
          const resp = await fetch("/v1/Video/getVideo",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
             },
-            body:JSON.stringify({email:"rajputaman724857@gmail.com"})
+            body:JSON.stringify({userId})
             
          })
 

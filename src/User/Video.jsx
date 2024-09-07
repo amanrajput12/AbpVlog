@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetVideo } from './UseGetVideo.js';
 import { useNavigate } from 'react-router-dom';
 import { addvideoId } from './GetSlice.js';
-
+import Cookies from "js-cookie"
 const Video = () => {
   const dispatch = useDispatch();
   const video = useSelector((store) => store.GetVideo);
+  const userId = Cookies.get('myid');
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(GetVideo());
+    dispatch(GetVideo(userId));
   }, [dispatch]);
 
   const handlePlay = (id) => {

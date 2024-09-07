@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import ReactLoading from "react-loading";
+import Cookies from "js-cookie"
 const ShowImage = () => {
   const user = useSelector((store) => store?.VerifyUser.Verification);
   const [imagevalue, setImagevalue] = useState(0);
   const [loading, setloading] = useState(null);
+  const [userId, setUserId] = useState(Cookies.get('myid'));
   const gradepay = useRef(null);
   console.log(user);
   async function verified(value) {
@@ -23,6 +25,7 @@ const ShowImage = () => {
         body: JSON.stringify({
           email,
           gradepay,
+          userId
         }),
       });
       const resp = await data.json();
