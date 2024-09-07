@@ -20,10 +20,10 @@ const RegisterSlice = createSlice({
             state.loading=true
         }) 
         .addCase(Register.fulfilled,(state,action)=>{
-            if(action.payload.sucess){
+          
             state.loading=false,
             state.register=true
-            }
+            
         })
         .addCase(Register.rejected,(state,action)=>{
             state.loading=false,

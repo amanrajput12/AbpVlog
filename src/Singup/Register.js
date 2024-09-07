@@ -4,7 +4,7 @@ import { fetchUserInfo } from "./useSingup.js";
 export const Register = createAsyncThunk("/user/Register",async function (value) {
      try {
         console.log("value in thunk",value);
-      const {token} = value
+      const {token,toast} = value
     
         const info = await fetchUserInfo(token)        
           console.log("info",info);
@@ -20,25 +20,25 @@ export const Register = createAsyncThunk("/user/Register",async function (value)
               acessToken:token
             })
           })
-          const data = await resp.json()
-          console.log("on login",data);
-          if(!data.success){
-            toast.error(data.message)
+          const userdata = await resp.json()
+          console.log("on login",value);
+          if(!userdata.sucess){
+            toast.error(userdata.message)
         
           }
-          if(data.message === "This user Already Exist"){
-            toast.error(data.message)
+          if(userdata.message === "This user Already Exist"){
+            toast.error(userdata.message)
           
           }
-          else if(data.message === "User created Sucessfully"){
+          else if(userdata.message === "User created Sucessfully"){
          
-            toast.success(data.message)
+            toast.success(userdata.message)
           }
-          else if(data.message === "This user does not exist"){
-            toast.error(data.message)
-          
+          else if(userdata.message === "This user does not exist"){
+            toast.error(userdata.message)
+            
           }
-             return data
+             return userdata
      } catch (error) {
         console.log("error on register user",error.message);
        
