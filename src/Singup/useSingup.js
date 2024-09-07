@@ -34,6 +34,7 @@ const singup = createAsyncThunk("/user/sigup",async(value)=>{
 
             const resp = await fetch("/v1/user/login",{
                 method:"POST",
+                credentials: 'include',
                 headers: {
                   'Content-Type': 'application/json',
                 },
