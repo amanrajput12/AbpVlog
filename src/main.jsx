@@ -8,8 +8,7 @@ import Admin from './Admin/Admin.jsx';
 import AdminDashboard from './Admin/AdminDashboard.jsx';
 import Video from './User/Video.jsx';
 import PlayVideo from './User/PlayVideo.jsx';
-import Singup from './Singup/Singup.jsx';
-import TimeSpend from './Admin/TimeSpend.jsx';
+
 import Register from './Register/Register.jsx';
 import VerifyUser from './Admin/VerifyUser.jsx';
 import ShowImage from './Admin/ShowImage.jsx';
@@ -18,6 +17,7 @@ import AboutUs from './Footer/Aboutus.jsx';
 
 import Appstore from '../store/store.js';
 import './index.css'
+import LoginMain from './Singup/LoginMain.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Singup />
+        element: <LoginMain />
       },
       {
         path: "video",
@@ -62,10 +62,7 @@ const routes = createBrowserRouter([
         path: "dashboard",
         element: <AdminDashboard />
       },
-      {
-        path: 'time',
-        element: <TimeSpend />
-      }
+     
     ]
   },
   {

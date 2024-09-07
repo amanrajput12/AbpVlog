@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 import Cookies from "js-cookie"
-import LoginSection from './Singup/Singup';
+
+import LoginMain from './Singup/LoginMain';
 
 const OutletComp = () => {
  const userRole = Cookies.get('userRole')
@@ -12,7 +13,7 @@ const OutletComp = () => {
 
     if (!(userId && accessToken && userId!=="undefined" && accessToken!=="undefined" )) {
         return <div>
-            <LoginSection/>
+            <LoginMain/>
         <Navigate to="/" />;  
         </div>
     }

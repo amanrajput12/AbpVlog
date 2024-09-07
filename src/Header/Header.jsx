@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { logout } from '../Singup/SingupSlice';
 import logo from '../../public/logo.jpeg'
 import { LuBoxSelect } from "react-icons/lu";
+import Loginbtn from '../Buttons/Loginbtn';
+import Signupbtn from '../Buttons/Signupbtn';
 
 
 const Header = () => {
@@ -15,6 +17,9 @@ const Header = () => {
   const userId = Cookies.get('myid');
   const [btntoogle,setBtnToogle] = useState(false)
 
+  const location = useLocation() 
+  const isHomeRoute = location.pathname === '/';
+
   const handleLogout = () => {
     Cookies.remove('accessToken');
     Cookies.remove('myid');
@@ -24,15 +29,19 @@ const Header = () => {
   };
 
   return (
-    <header className=" sticky top-0  z-10 bg-gray-800 shadow-lg p-3">
-        <div className='flex h-20 items-center justify-between  '>
+    <header
+    className={`sticky top-0 z-10 transition-all duration-300 ${
+      isHomeRoute ? 'bg-gray-950' : 'bg-gray-800'
+    } shadow-lg p-3 ${isHomeRoute ? 'text-white' : 'text-black'}`}
+  >
+        <div className='flex  h-20 items-centr justify-around  items-center '>
 
 
 
 
           
-      <div className=" ml-4 text-white text-2xl font-bold cursor-pointer" >
-           <img onClick={()=>navigate("/video")} className='w-12 rounded-md' src={logo} alt="" />
+      <div className=" ml-4 text-2xl font-bold cursor-pointer" >
+           <img onClick={()=> {isHomeRoute? "": navigate("/video")}} className='w-12 rounded-md' src={logo} alt="" />
           
       </div>
  
@@ -77,6 +86,11 @@ const Header = () => {
 
       }
       </div>
+      {/* for home  */} 
+     { isHomeRoute && <div className='flex gap-8'>
+       <Loginbtn/>
+       <Signupbtn/>
+      </div>}
       </div>
     </header>
   );

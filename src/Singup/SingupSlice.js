@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import signup from "./useSingup.js";
 import Cookies from "js-cookie";
+import { steps } from "framer-motion";
 
 
 const SignupSlice = createSlice({
@@ -9,7 +10,8 @@ const SignupSlice = createSlice({
     loading: false,
     error: null,
     data: {},
-    sucess:false
+    sucess:false,
+  
   },
   reducers: {
     logout:(state,action)=>{
@@ -37,14 +39,13 @@ const SignupSlice = createSlice({
      if (action?.payload?.data?.role === "admin") {
       Cookies.set('userRole', action?.payload?.data?.role, { expires:value });
      }
-     if(action.payload.sucess){
      state.sucess=true
-     }
 })
 
       .addCase(signup.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+       
       });
        },
 });

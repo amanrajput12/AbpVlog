@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Register } from "./Register.js";
-import { act } from "react";
+
 
 
 const RegisterSlice = createSlice({

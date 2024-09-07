@@ -27,8 +27,8 @@ export const fetchUserInfo = async (token) => {
 const singup = createAsyncThunk("/user/sigup",async(value)=>{
     try { 
       console.log("value in thunk",value);
-       const {token,toast,setLoading} = value
-       setLoading("flex")
+       const {token,toast} = value
+       
           const info = await fetchUserInfo(token)        
             console.log("info",info);
 
@@ -49,22 +49,26 @@ const singup = createAsyncThunk("/user/sigup",async(value)=>{
               if(!data.success){
                 toast.error(data.message)
                 
-                setLoading(null)
+         
               }
               if(data.message == "user Login sucess"){
+                console.log(data.message);
+                
                 toast.success(data.message)
-                setLoading(null)
+                
               }
               else if(data.message == "This user does not exist"){
                 toast.error(`${data.message} Please Sign Up`)
-                setLoading(null)
+             
+              console.log(data.message);
+              
               }
                  return data
          
     } catch (error) {
         console.log("error on sigup the user",error);
-        toast.error(error.response.data.message)
-        setLoading(null)
+       
+ 
        
         
     }
