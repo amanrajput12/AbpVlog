@@ -23,6 +23,7 @@ const App = () => {
       try {
         const response = await fetch("/v1/member/get", {
           method: "GET",
+          credentials: 'include',
         });
         const data = await response.json();
         const memberCount = data.Member[0].Member;
