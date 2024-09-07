@@ -84,6 +84,8 @@ export const login = async function(req,res) {
 
 export const Forverify = async function (req,res) {
        try {
+        console.log("for verification",req.body);
+        
         const userdata = await User.find({isVerified:false});
         if(userdata){
             return res.status(200).json({
