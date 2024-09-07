@@ -25,8 +25,8 @@ export const register = async function (req,res) {
             email:Email,
             username:name,
             acessToken,
-            isVerified:false
-            
+            isVerified:false,
+           
         })
         if(userdata){
             return res.status(200).json({
