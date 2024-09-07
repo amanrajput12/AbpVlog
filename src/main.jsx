@@ -15,7 +15,7 @@ import VerifyUser from './Admin/VerifyUser.jsx';
 import ShowImage from './Admin/ShowImage.jsx';
 import Wallet from './User/Wallet.jsx';
 import AboutUs from './Footer/Aboutus.jsx';
-import AuthRoute from './User/AuthRoute.jsx'; // Import the AuthRoute component
+
 import Appstore from '../store/store.js';
 import './index.css'
 
@@ -30,15 +30,15 @@ const routes = createBrowserRouter([
       },
       {
         path: "video",
-        element: <AuthRoute element={<Video />} /> // Protect the route
+        element: <Video /> // Protect the route
       },
       {
         path: 'wallet',
-        element: <AuthRoute element={<Wallet />} /> // Protect the route
+        element: <Wallet/> // Protect the route
       },
       {
         path: "video/play",
-        element: <AuthRoute element={<PlayVideo />} /> // Protect the route
+        element: <PlayVideo />// Protect the route
       },
       {
         path: 'register',
@@ -48,7 +48,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AuthRoute element={<Admin />} />, // Protect the admin route
+    element: <Admin />, // Protect the admin route
     children: [
       {
         path: "",

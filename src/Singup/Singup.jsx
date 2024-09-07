@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import { Register } from './Register.js';
 import toast, { Toaster } from 'react-hot-toast';
 import ReactLoading from 'react-loading';
+import AboutUs from '../Footer/Aboutus.jsx';
 
 const LoginSection = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const LoginSection = () => {
   
 
   return (
+    
     <div className="relative flex flex-col min-h-[80vh] justify-center items-center ">
       <div className="bg-gradient-to-r from-gray-800 to-black  rounded-2xl xl:w-[50vw]  p-8 flex flex-col justify-center items-center shadow-lg transition-shadow duration-300 relative overflow-hidden h-[80vh] animate-snakeBorder">
       <ReactLoading className={`mx-auto ${loading} sticky top-12 z-30 `} hidden type="balls" color={"#00000"} height={100} width={100} />
@@ -78,6 +80,7 @@ const LoginSection = () => {
             <a onClick={handleRegister} className="text-blue-600 hover:underline cursor-pointer">
               Sign up
             </a>
+    
           </p>
         </div>
       </div>

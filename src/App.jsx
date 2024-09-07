@@ -4,6 +4,7 @@ import Header from './Header/Header.jsx';
 import Footer from './Footer/Footer.jsx';
 import LoginSection from './Singup/Singup.jsx';
 import Cookies from "js-cookie"
+import OutletComp from './OutletComp.jsx';
 
 const App = () => {
   const [actualMember, setActualMember] = useState(null);
@@ -58,7 +59,7 @@ const App = () => {
     
       <Header />
       <div className="flex items-center flex-col">
-        <Outlet />
+        <OutletComp/>
         {isHomeRoute && 
         <div className=" xl:absolute p-4  z-20 top-1 right-[5vw] animate-bounce xl:animate-none">
           <h2 className="text-xl xl:text-3xl  font-extrabold text-gray-300">Current Member</h2>

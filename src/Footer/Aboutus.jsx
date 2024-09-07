@@ -17,6 +17,7 @@ const AboutUs = () => {
             Our platform is designed to elevate your business by connecting you with millions of potential customers daily.
             We leverage advanced targeting to ensure your message reaches the right audience at the right time, all while maximizing engagement and conversions.
           </p>
+          
 
           <img
             src={Aboutus} 
