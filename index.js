@@ -21,6 +21,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(cors({
     origin: ['https://apbvlogs.netlify.app','http://localhost:5173','https://bae.org.in'],
+    credentials: true,
 }));
 
 app.use(express.json());
