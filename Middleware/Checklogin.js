@@ -18,7 +18,10 @@ export const checklogin =async(req, res, next) => {
      
  
     if (!verify.isVerified) {
-        return res.status(403).json({ message: 'User is not verified for login' });
+        return res.status(403).json({ 
+            message: 'User is not verified for login',
+            sucess:false
+         });
     }
 
     next(); // If verified, proceed to the next middleware or route handler
