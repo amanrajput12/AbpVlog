@@ -1,4 +1,3 @@
-
 [[redirects]]
   from = "/v1/*"
   to = "https://abpvlog.onrender.com/v1/:splat"
@@ -6,6 +5,13 @@
   force = true
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status =200
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
