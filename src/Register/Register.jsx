@@ -9,6 +9,7 @@ import ReactLoading from 'react-loading';
 const Register = () => {
   const [userEmail, setUserEmail] = useState('');
   const [refEmail, setRefEmail] = useState('');
+  const [empId, setEmpId] = useState('');
   const [userId, setUserId] = useState(null);  // This should be a text input
   const [userPhoto, setUserPhoto] = useState(null);
   const [paymentPhoto, setPaymentPhoto] = useState(null);
@@ -30,6 +31,7 @@ const Register = () => {
     formData.append('userId', userId); // Append userId as text, not as file
     formData.append('mobileNumber',mobileNumber)
     formData.append('bankAccountNumber',bankAccountNumber)
+    formData.append("empId",empId)
     formData.append('ifscCode',ifscCode)
     if (userPhoto) {
       formData.append('userPhoto', userPhoto);
@@ -98,6 +100,21 @@ const Register = () => {
               onChange={(e) => setRefEmail(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
               required
+            />
+          </div>
+
+
+          
+          <div>
+            <label htmlFor="empId" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">Employee ID</label>
+            <input
+              type="text"
+              id="empId"
+              name="empId"
+              value={empId}
+              onChange={(e) => setEmpId(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+           
             />
           </div>
 
