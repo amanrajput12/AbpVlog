@@ -25,7 +25,7 @@ const AdminDashboard = () => {
 
   async function fetchVideo() {
     try {
-      const data = await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCK8sQmJBp8GCxrOtXWBpyEA&maxResults=50&type=video", {
+      const data = await fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCjICW5kTfJa0Kqgt5WOP2cA&maxResults=50&type=video", {
         method:"GET",
         headers: {
           Authorization: `Bearer ${token}`,
