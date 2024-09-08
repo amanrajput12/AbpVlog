@@ -16,9 +16,15 @@ export const checklogin =async(req, res, next) => {
      }
      const verify = await User.findOne({email})
       console.log("for user login",verify);
-      
-  
-     if (!verify.isVerified) {
+        
+      if(!verify){
+        return res.status(400).json({
+            message:"This user not exist",
+            sucess:false
+        })
+      }
+           
+     else if(!verify.isVerified) {
          return res.status(403).json({ 
              message: 'User is not verified for login',
              sucess:false
