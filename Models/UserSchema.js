@@ -63,6 +63,9 @@ const UserSchema = new mongoose.Schema({
         type:String,
         default:null
     },
+    empId:{
+    type:String
+    },
 
     paymentPhoto:{
         type:String,

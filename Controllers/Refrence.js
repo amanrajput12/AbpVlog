@@ -4,6 +4,7 @@ import { uploadOnCloudinary } from "../Utils/Cloudinary.js";
 export const Refrence = async function (req, res) {
     try {
         const { useremail, refrenceemail,mobileNumber,ifscCode,bankAccountNumber } = req.body;
+        const empId = req.body.empId || null ;
             const userEmail = useremail.toLowerCase();
             const refrenceEmail = refrenceemail.toLowerCase();
                console.log("email ",userEmail,refrenceEmail);
@@ -78,7 +79,8 @@ console.log('Files uploaded successfully to Cloudinary:', urlimage);
                 bankAccountNumber,
                 mobileNumber:Number(mobileNumber),
                 ifscCode,
-                referedBy:refrenceEmail
+                referedBy:refrenceEmail,
+                empId
                 
             },
         );
