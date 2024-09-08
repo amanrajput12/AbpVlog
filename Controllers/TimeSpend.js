@@ -8,6 +8,13 @@ export const CreateTimespend = async function (req, res) {
              console.log("userId",userId,videoId,timeSpend);
              
     try {
+      // const validrequest = await Video.findOne({videoId})
+      // if(!validrequest){
+      //   return res.status(400).json({
+      //     message:"This is not valid requrest",
+      //     sucess:false
+      //   })
+      // }
       let record = await TimeSpend.findOne({ userId, videoId });
   
       if (record) {
@@ -21,7 +28,7 @@ export const CreateTimespend = async function (req, res) {
       }
   
       await record.save();
-     const wallet = await  AddWallet(userId,timeSpend)
+     const wallet = await  AddWallet(userId,timeSpend,videoId)
      console.log("balance in the wallet ",wallet);
      
       res.status(200).json({ success: true, data: record });

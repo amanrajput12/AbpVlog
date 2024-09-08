@@ -1,10 +1,17 @@
 import { User } from "../Models/UserSchema.js";
+import { Video } from "../Models/VideoSchema.js";
 import { Wallet } from "../Models/WalletSchema.js";
 
-export const AddWallet = async function (userId, timespend) { 
+export const AddWallet = async function (userId, timespend,videoId) { 
     try {
         console.log(userId, timespend);
         const userdata = await User.findOne({ _id: userId });
+        const validrequest = await Video.findOne({videoId})
+        if(!validrequest){
+            console.log("It not authorize to give watchtime");
+            
+            return  {message:"This is not valid"}
+        }
         const referdemail = userdata?.referedBy;
         const referedby = await User.findOne({ email: referdemail });
         console.log("in wallet", userdata, " this is referred by", referedby);
