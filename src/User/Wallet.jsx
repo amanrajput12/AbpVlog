@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { Withdwal } from './UseWithdwal.js';
+import toast, { Toaster } from 'react-hot-toast';
+import ReactLoading from "react-loading";
 
 const Wallet = () => {
   const [walletData, setWalletData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+   const [request,setRequest] = useState(false)
   const userId = Cookies.get('myid');  // Get the user ID from cookies
-
+  const dispatch = useDispatch()
   // Fetch wallet data
   useEffect(() => {
     const fetchWalletData = async () => {
@@ -50,8 +55,18 @@ const Wallet = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-[70vh]">
+    <div className="flex items-center justify-center min-h-[88vh]">
     <div className="wallet-container w-full xl:w-[50vw] p-8 bg-gradient-to-b from-neutral-300 to-zinc-950 shadow-orange rounded-lg flex flex-col justify-center items-center xl:h-[60vh]">
+    <ReactLoading
+          className={`mx-auto absolute top-[10vh] ${
+            request ? "flex" : "null"
+          } `}
+          hidden
+          type="balls"
+          color={"#fff"}
+          height={100}
+          width={100}
+        />
 
         <h2 className="text-3xl font-bold text-blue-600 mb-6">Your Wallet</h2>
         
@@ -60,6 +75,7 @@ const Wallet = () => {
             <div className="text-lg font-semibold text-gray-700">
               <p><strong>Email:</strong> {walletData.email}</p>
               <p><strong>Total Balance:</strong> ₹{walletData.TotalBalance}</p>
+              <button onClick={()=>dispatch(Withdwal({email:walletData.email,userId:walletData.userId,toast,setRequest}))} className='bg-gradient-to-br from-sky-500 to-gray-950 p-2 text-white rounded-md hover:from-gray-950 hover:to-sky-500 hover:shadow-2xl'>Withdwal</button>
             </div>
 
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mt-4 hover:animate-slideIn">
@@ -80,6 +96,7 @@ const Wallet = () => {
           <div className="card card3 absolute w-32 h-20 bg-gradient-to-bl from-green-300 to-teal-950 rounded-lg transform transition-transform duration-700 ease-in-out animate-move"></div> 
         </div>
       </div>
+      <Toaster/>
     </div>
   );
 };

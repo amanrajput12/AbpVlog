@@ -18,6 +18,7 @@ import AboutUs from './Footer/Aboutus.jsx';
 import Appstore from '../store/store.js';
 import './index.css'
 import LoginMain from './Singup/LoginMain.jsx';
+import CreateAdd from './Admin/CreateAdd.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const routes = createBrowserRouter([
       {
         path: "",
         element: <VerifyUser />
+      },
+      {
+       path:'createAdd',
+       element:<CreateAdd/>
       },
       {
         path: "check",
