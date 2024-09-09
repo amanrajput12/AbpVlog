@@ -24,7 +24,9 @@ export const CreateTimespend = async function (req, res) {
         
       } else {
         // Create a new record
-        record = new TimeSpend({ userId, videoId, timeSpend });
+        record = new TimeSpend({ userId, videoId, timeSpend }).populate('userId');
+      
+        
       }
   
       await record.save();

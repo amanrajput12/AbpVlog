@@ -14,6 +14,9 @@ const WalletSchema = new mongoose.Schema({
      email:{
         type:String,
         require:true
+     },
+     withdrwalreq:{
+      type:Date
      }
 })
 
