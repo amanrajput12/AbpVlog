@@ -19,6 +19,7 @@ import Appstore from '../store/store.js';
 import './index.css'
 import LoginMain from './Singup/LoginMain.jsx';
 import CreateAdd from './Admin/CreateAdd.jsx';
+import TermsAndConditions from './Footer/TermsAndConditions.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const routes = createBrowserRouter([
   {
     path: "/about",
     element: <AboutUs />
+  },
+  {
+    path:"/terms",
+    element:<TermsAndConditions/>
   }
   
 ]);
