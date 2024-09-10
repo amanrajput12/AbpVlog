@@ -55,14 +55,7 @@ const UserSchema = new mongoose.Schema({
             type: String,
         }
     ],
-    authId:{
-        type:String,
-        default:null
-    },
-    userPhoto:{
-        type:String,
-        default:null
-    },
+   
     empId:{
     type:String
     },

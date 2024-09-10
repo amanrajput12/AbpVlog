@@ -9,11 +9,10 @@ export const Refrence = async function (req, res) {
             const refrenceEmail = refrenceemail.toLowerCase();
                console.log("email ",userEmail,refrenceEmail);
                
-        const userId = req.files.userId[0].path;
-     const userPhoto =req.files.userPhoto[0].path;
-     const  paymentPhoto=  req.files.paymentPhoto[0].path;
+    
+     const  paymentPhoto=  req.file.path;
 
-     if(!(useremail,refrenceemail,mobileNumber,ifscCode,bankAccountNumber,userId,userPhoto,paymentPhoto)){
+     if(!(useremail,refrenceemail,mobileNumber,ifscCode,bankAccountNumber,paymentPhoto)){
         console.log("all field requird");
         
             return res.status(400).json({
@@ -43,39 +42,28 @@ export const Refrence = async function (req, res) {
                 success: false
             });
         }
-              console.log(req.files.userId[0].path);
-              console.log(req.files.userPhoto[0].path);
-              console.log(req.files.paymentPhoto[0].path);
+             
+              console.log(req.file.path);
       
-              const resultcloud = await Promise.all([
-                uploadOnCloudinary(req.files.userId[0].path).then(result => ({ fieldname: 'userId', url: result.secure_url })),
-                uploadOnCloudinary(req.files.userPhoto[0].path).then(result => ({ fieldname: 'userPhoto', url: result.secure_url })),
-                uploadOnCloudinary(req.files.paymentPhoto[0].path).then(result => ({ fieldname: 'paymentPhoto', url: result.secure_url })),
-              ]) 
-              console.log("check of result promise",resultcloud);
-
-              if(!resultcloud){
+              const result = await uploadOnCloudinary(req.file.path);
+               
+           
+              if(!result.url){
                 return res.status(400).json({
                     message:"Error on Upload the image",
                     success:false
                 })
              }
               
-              const urlimage = {};
-              resultcloud.forEach(result => {
-            urlimage[result.fieldname] = result.url;
-});
-console.log('Files uploaded successfully to Cloudinary:', urlimage);
-                
     
         // Update user with useremail
         const Myresp = await User.findOneAndUpdate(
             { email: userEmail },
             { 
-                authId: urlimage.userPhoto || "", // Assuming 'userPhoto' is for authId
-                paymentPhoto: urlimage.paymentPhoto || "", // Assuming 'paymentPhoto' is for payment proof
+                
+                paymentPhoto:result.url,
                 isrefrence: true ,
-                userPhoto:urlimage.userPhoto,
+             
                 bankAccountNumber,
                 mobileNumber:Number(mobileNumber),
                 ifscCode,
