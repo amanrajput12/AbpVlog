@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /private
+Allow: /
+Sitemap: https://bae.org.in/sitemap.xml
+

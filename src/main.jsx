@@ -74,6 +74,7 @@ const routes = createBrowserRouter([
     path: "/about",
     element: <AboutUs />
   }
+  
 ]);
 
 const root = createRoot(document.getElementById('root'));
