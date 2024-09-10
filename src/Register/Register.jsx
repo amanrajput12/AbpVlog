@@ -10,8 +10,7 @@ const Register = () => {
   const [userEmail, setUserEmail] = useState('');
   const [refEmail, setRefEmail] = useState('');
   const [empId, setEmpId] = useState('');
-  const [userId, setUserId] = useState(null);  // This should be a text input
-  const [userPhoto, setUserPhoto] = useState(null);
+  const [username, setUsername] = useState('');  // This should be a text input
   const [paymentPhoto, setPaymentPhoto] = useState(null);
   const [loading, setLoading] = useState(null);
   const [mobileNumber,setMobileNumber]=useState(null)
@@ -28,14 +27,11 @@ const Register = () => {
     const formData = new FormData();
     formData.append('useremail', userEmail);
     formData.append('refrenceemail', refEmail);
-    formData.append('userId', userId); // Append userId as text, not as file
     formData.append('mobileNumber',mobileNumber)
     formData.append('bankAccountNumber',bankAccountNumber)
     formData.append("empId",empId)
     formData.append('ifscCode',ifscCode)
-    if (userPhoto) {
-      formData.append('userPhoto', userPhoto);
-    }
+    
     if (paymentPhoto) {
       formData.append('paymentPhoto', paymentPhoto);
     } 
@@ -159,28 +155,8 @@ const Register = () => {
 
         
 
-          <div>
-            <label htmlFor="userId" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">User ID</label>
-            <input
-              type="file"  // Corrected to text input
-              id="userId"
-              name="userId"
-              onChange={(e) =>setUserId(e.target.files[0])}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
-              required
-            />
-          </div>
 
-          <div>
-            <label htmlFor="userPhoto" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">User Photo</label>
-            <input
-              type="file"
-              id="userPhoto"
-              name="userPhoto"
-              onChange={(e) => setUserPhoto(e.target.files[0])}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-            />
-          </div>
+         
 
           <div>
             <label htmlFor="paymentPhoto" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">Payment Photo</label>

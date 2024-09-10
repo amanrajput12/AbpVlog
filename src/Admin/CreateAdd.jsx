@@ -25,7 +25,7 @@ const CreateAdd = () => {
     try {
       setLoading(true);
       const response = await fetch("/v1/adds/create", {
-        method: "POST",
+        method: "GET",
         body: formData, // Send FormData object
       });
 
