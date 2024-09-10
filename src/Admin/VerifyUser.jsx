@@ -41,7 +41,7 @@ const VerifyUser = () => {
             <tbody className="text-gray-800 text-sm xl:text-3xl font-light">
               {user.data.map((user, i) => (
                 <tr   onClick={()=>{
-                  dispatch(userVerfication({userId:user._id,email:user.email,username:user.username,Photo:[user.authId,user.userPhoto,user.paymentPhoto],ifscCode:user.ifscCode,bankAccountNumber:user.bankAccountNumber,mobileNumber:user.mobileNumber}))
+                  dispatch(userVerfication({userId:user._id,email:user.email,username:user.username,Photo:user.paymentPhoto,ifscCode:user.ifscCode,bankAccountNumber:user.bankAccountNumber,mobileNumber:user.mobileNumber}))
                   navigate("check")
                 }} 
                   key={user._id}

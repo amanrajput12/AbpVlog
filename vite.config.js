@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/v1': {
-        target: 'https://abpvlog.onrender.com',
+        target: 'http://localhost:4000',
         changeOrigin: true,  // This will change the origin of the host header
          
       }

@@ -8,7 +8,7 @@ const ShowImage = () => {
   const [imagevalue, setImagevalue] = useState(0);
   const [loading, setloading] = useState(null);
   const [userId, setUserId] = useState(Cookies.get('myid'));
-  const gradepay = useRef(null);
+  const gradepay = useRef(1600);
   console.log(user);
   async function verified(value) {
     const { email, gradepay } = value;
@@ -51,10 +51,10 @@ const ShowImage = () => {
       {user && (
         <div className="flex flex-col">
           <div className="flex flex-col-reverse xl:flex-row justify-center gap-7 items-center">
-            {user?.Photo && user.Photo[imagevalue] ? (
+            {user?.Photo && user.Photo ? (
               <img
                 className="h-[90vh] xl:h-[60vh]"
-                src={user.Photo[imagevalue]}
+                src={user.Photo}
                 alt="photo"
               />
             ) : (
@@ -100,34 +100,7 @@ const ShowImage = () => {
               </table>
             </div>
           </div>
-          <div className="flex justify-center gap-6 mt-2">
-            <button
-              onClick={() => {
-                if (imagevalue > 0) {
-                  setImagevalue(imagevalue - 1);
-                }
-              }}
-              className={` ${
-                imagevalue == 0 ? "bg-green-200" : "flex"
-              } bg-green-500 p-2 rounded-md text-white `}
-            >
-              Prev
-            </button>
-            <button
-              onClick={() => {
-                if (imagevalue < 2) {
-                  console.log(imagevalue);
-
-                  setImagevalue(imagevalue + 1);
-                }
-              }}
-              className={` ${
-                imagevalue == 2 ? "bg-green-200" : "flex"
-              } bg-green-500 p-2 rounded-md text-white `}
-            >
-              Next
-            </button>
-          </div>
+         
           <div className="flex justify-center xl:mt-9 p-3 gap-9 ">
             <h2 className="xl:text-3xl xl:font-bold">GradePay</h2>
             <select
