@@ -22,7 +22,7 @@ const Loginbtn = () => {
 
   return (
        <div>     
-         <button  onClick={() => login()} className='p-2 bg-gradient-to-tr from-cyan-400 to-cyan-950 rounded-sm hover:animate-snakeBorder'>
+         <button  onClick={() => login()} className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition-colors'>
       Login
       </button>
       <Toaster/>

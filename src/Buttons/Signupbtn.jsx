@@ -13,7 +13,7 @@ const Signupbtn = () => {
         redirectUri: 'https://bae.org.in', // Esure this matches what’s registered in Google Cloud
       });
   return <div>  
-    <button onClick={handleRegister} className='p-2 bg-gradient-to-tr from-cyan-400 to-cyan-950 rounded-sm hover:animate-snakeBorder'>
+    <button onClick={handleRegister} className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition-colors'>
     Signup
    </button>
    <Toaster/>

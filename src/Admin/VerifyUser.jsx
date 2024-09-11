@@ -31,10 +31,12 @@ const VerifyUser = () => {
                
                 
                
-                <th className=" p-1 xl:py-3 xl:px-6 text-left">
+                <th className="hidden xl:table-cell p-1 xl:py-3 xl:px-6 text-left">
                   isVerified
                 </th>
-               
+                <th className=" p-1 xl:py-3 xl:px-6 text-left">
+                  Date
+                </th>
              
               </tr>
             </thead>
@@ -56,8 +58,11 @@ const VerifyUser = () => {
                   <td className="p-1 xl:py-3 max-w-[25vh] xl:max-w-[100vw] xl:px-6 text-left whitespace-normal break-words leading-relaxed">
                     {user.email}
                   </td>
-                  <td className=" xl:py-3 xl:px-6 text-left">
+                  <td className=" hidden xl:table-cell xl:py-3 xl:px-6 text-left">
                     {user.isVerified ? "Yes" : "No"}
+                  </td>
+                  <td className=" xl:py-3 xl:px-6 text-left">
+                    { `${new Date(user.createdAt).toLocaleString()}`}
                   </td>
                 </tr>
               ))}

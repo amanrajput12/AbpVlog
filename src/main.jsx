@@ -20,6 +20,7 @@ import './index.css'
 import LoginMain from './Singup/LoginMain.jsx';
 import CreateAdd from './Admin/CreateAdd.jsx';
 import TermsAndConditions from './Footer/TermsAndConditions.jsx';
+import CareerPage from './Footer/CareerPage.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const routes = createBrowserRouter([
   {
     path:"/terms",
     element:<TermsAndConditions/>
+  },
+  {
+    path:"/careers",
+    element:<CareerPage/>
   }
   
 ]);
