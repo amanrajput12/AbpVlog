@@ -125,7 +125,7 @@ const Header = () => {
 
             {/* Dropdown for smaller screens */}
             <button
-              className='xl:hidden'
+              className='md:hidden'
               onClick={toggleDropdown}
             >
               {dropdownOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
