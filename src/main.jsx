@@ -21,6 +21,7 @@ import LoginMain from './Singup/LoginMain.jsx';
 import CreateAdd from './Admin/CreateAdd.jsx';
 import TermsAndConditions from './Footer/TermsAndConditions.jsx';
 import CareerPage from './Footer/CareerPage.jsx';
+import AdminWallet from './Admin/AdminWallet.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const routes = createBrowserRouter([
       {
         path: "",
         element: <VerifyUser />
+      },
+      {
+        path:'wallet',
+        element:<AdminWallet/>
       },
       {
        path:'createAdd',

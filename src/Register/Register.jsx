@@ -128,7 +128,7 @@ const Register = () => {
 </div>
 
 <div>
-  <label htmlFor="bankAccountNumber" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">Bank Account Number</label>
+  <label htmlFor="bankAccountNumber" className="block text-sm xl:text-2xl font-medium xl:font-bold text-gray-700">Bank Account Number/ UPI ID</label>
   <input
     type="text"
     id="bankAccountNumber"
