@@ -197,12 +197,35 @@ export const Withdrwal = async function (req, res) {
     </div>
 `;
 
-      const mail = await Mailsend(
-        email,
-        "Your Withdrawal Request Has Been Accepted",
-        emailContent
-      );
-      console.log("after mail send", mail);
+// Send a notification email to the organization to inform them about the user's withdrawal request
+const orgEmailContent = `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+        <h2 style="color: #4CAF50;">Withdrawal Request Notification</h2>
+        <p>Dear BHOMI ADVERTISEMENT ENTERPRISE,</p>
+        <p>This is to notify you that the user <strong>${username}</strong> (Email: ${email}) has requested a withdrawal.</p>
+        <p>Please take the necessary steps to process this request.</p>
+        
+        <p style="margin-top: 20px;">Best regards,</p>
+        <p><strong>System Notification</strong></p>
+    </div>
+`;
+
+// Send notification to organization
+const mailforOrg = await Mailsend(
+    "bhomiade@bae.org.in",
+    "User Withdrawal Request Notification",
+    orgEmailContent
+);
+console.log("Mail sent to organization", mailforOrg);
+
+// Send confirmation email to user
+const mail = await Mailsend(
+    email,
+    "Your Withdrawal Request Has Been Accepted",
+    emailContent
+);
+console.log("Mail sent to user", mail);
+
 
       if(mail){
         res.status(200).json({
@@ -224,4 +247,48 @@ export const Withdrwal = async function (req, res) {
   }
 };
 
+export const AdminWallet = async function (req,res) {
+  try {
+     const walletdata = await  Wallet.find()
+      res.status(200).json({
+        message:"Data get Sucess",
+        sucess:true,
+        data:walletdata
+      })
 
+  } catch (error) {
+    console.log("error on getting wallet for admin",error.message);
+    res.status(500).json({
+      message:"Error on getting wallet in admin",
+      sucess:false
+    })
+    
+  }
+}
+
+export const GrantWithdrwal = async function(req,res){
+  try {
+     const {email} = req.body 
+         console.log(req.body);
+         
+     const update = await Wallet.findOneAndUpdate(
+      {email:email},
+      {TotalBalance:0}
+     )
+     res.status(200).json({
+      message:"Wallet update sucess",
+      sucess:true,
+      data:update
+     })
+     
+
+  } catch (error) {
+    console.log("error on grant withdrwal",error.message);
+    res.status(500).json(({
+      message:"Error on grant withdrwal",
+      sucess:false
+    }))
+    
+  }
+}
+ 

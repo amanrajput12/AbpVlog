@@ -37,7 +37,8 @@ export const AddVideo = async function(req,res){
 
 export const GetVideo = async function(req,res){
     const time = new Date().toISOString();
-    console.log(time);
+
+    console.log("current time",time);
     const {email,name,acessToken} = req.body
     
     try {

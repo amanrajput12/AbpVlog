@@ -9,6 +9,6 @@ const Userrouter = Router()
 
 
 Userrouter.route("/register").post(SubscibeChannel,register)
-Userrouter.route("/login").post(checklogin,login)
+Userrouter.route("/login").post(SubscibeChannel,checklogin,login)
 
 export {Userrouter}
