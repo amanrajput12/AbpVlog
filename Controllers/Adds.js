@@ -35,7 +35,8 @@ export const CreateAdds = async function (req,res) {
 
 export const GetAdds = async function (req,res) {
     try {
-        const add = await Adds.find()
+        const time = new Date().toISOString();
+        const add = await Adds.find({ startTime: { $lt: time }, endTime:{$gt:time}})
          if(add){
             res.status(200).json({
                 message:"Getting adds",
