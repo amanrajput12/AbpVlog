@@ -60,4 +60,50 @@ export const GetVideo = async function(req,res){
     }
 }
 
+export const AdminGetVideo = async function (req,res) {
+    try {
+         const Getvideo  = await Video.find()
+         if(Getvideo){
+            res.status(200).json({
+                message:"Getting video sucess",
+                sucess:true,
+                Getvideo
+            })
+         }
+    } catch (error) {
+        console.log("error on getting video on admin");
+        res.status(500).json({
+            message:"Error on getting video",
+            sucess:false
+        })
+        
+    }
+}
+
+export const AdminDelete = async function (req,res) {
+   try {
+     const {id} =req.body;
+     const value = req.body.id
+     console.log(req.body,id);
+     
+     const data = await Video.findByIdAndDelete({_id:value})
+     console.log("getting ",data);
+     
+    
+      res.status(200).json({
+        message:"video delete sucess",
+        sucess:true,
+
+      })
+       
+
+   } catch (error) {
+     console.log("error on delete video");
+     res.status(500).json({
+
+     })
+     
+   }  
+} 
+
 

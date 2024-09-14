@@ -3,6 +3,7 @@ import { Router } from "express";
 import { Forverify } from "../Controllers/UserController.js";
 import { VerifyUser } from "../Controllers/VerifyUser.js";
 import { AdminVerify } from "../Middleware/AdminVerify.js";
+import { AdminDelete, AdminGetVideo } from "../Controllers/VideoController.js";
 
 
 
@@ -12,6 +13,8 @@ const Adminrouter = Router()
 
 Adminrouter.route('/forverify').post(AdminVerify,Forverify)
 Adminrouter.route('/profileverify').post(AdminVerify,VerifyUser)
+Adminrouter.route('/getvideo').get(AdminGetVideo)
+Adminrouter.route('/deletevideo').post(AdminDelete)
 // Adminrouter.route('/getsub').post(GetSubscription)
 
 
