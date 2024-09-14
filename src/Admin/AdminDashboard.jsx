@@ -10,6 +10,7 @@ import 'react-clock/dist/Clock.css';
 import VideoAdd from './useVideoAdd.js';
 import Cookies from "js-cookie"
 import toast, { Toaster } from 'react-hot-toast';
+import VideoHeader from './VideoHeader.jsx';
 const AdminDashboard = () => {
   const token = Cookies.get("accessToken");
   const [userId, setUserId] = useState(Cookies.get('myid'));
@@ -42,6 +43,7 @@ const AdminDashboard = () => {
   return (
     <div className="p-4 bg-gray-900 text-white">
       <h2 className="text-xl font-bold mb-4">Admin Dashboard</h2>
+      <VideoHeader/>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {data?.map((data) => (
           <div className="bg-gray-800 p-4 rounded-xl shadow" key={data.id.videoId}>

@@ -22,6 +22,8 @@ import CreateAdd from './Admin/CreateAdd.jsx';
 import TermsAndConditions from './Footer/TermsAndConditions.jsx';
 import CareerPage from './Footer/CareerPage.jsx';
 import AdminWallet from './Admin/AdminWallet.jsx';
+import SearchVideo from './Admin/SearchVideo.jsx';
+import DeleteVideo from './Admin/DeleteVideo.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -72,8 +74,17 @@ const routes = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <AdminDashboard />
+        element: <AdminDashboard />,
+       
       },
+      {
+        path:'search',
+        element:<SearchVideo/>
+      },
+      {
+        path:'delete',
+        element:<DeleteVideo/>
+      }
      
     ]
   },
