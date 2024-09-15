@@ -73,7 +73,7 @@ const Header = () => {
                 className='w-[100px] text-slate-200 h-[30px] hover:cursor-pointer'
               />
               {btntoogle && (
-                <div className='bg-black mt-1 p-2 rounded-lg w-24 absolute'>
+                <div className='bg-black mt-1 p-2 flex flex-col rounded-lg w-24 absolute'>
                   <button
                     onClick={() => {
                       navigate('/wallet');
@@ -82,6 +82,16 @@ const Header = () => {
                     className='p-2 m-2 rounded-md bg-blue-700 hover:bg-blue-400'
                   >
                     Wallet
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      navigate('team');
+                      setBtnToogle(false);
+                    }}
+                    className="p-2 m-2 rounded-md bg-blue-700 hover:bg-blue-400 "
+                  >
+                    Team
                   </button>
                   <button
                     onClick={() => {
@@ -92,6 +102,8 @@ const Header = () => {
                   >
                     Logout
                   </button>
+
+                 
                 </div>
               )}
             </div>

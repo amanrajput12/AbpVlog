@@ -24,6 +24,7 @@ import CareerPage from './Footer/CareerPage.jsx';
 import AdminWallet from './Admin/AdminWallet.jsx';
 import SearchVideo from './Admin/SearchVideo.jsx';
 import DeleteVideo from './Admin/DeleteVideo.jsx';
+import Team from './User/Team.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const routes = createBrowserRouter([
       {
         path: 'wallet',
         element: <Wallet/> // Protect the route
+      },
+      {
+        path:'team',
+        element:<Team/>
       },
       {
         path: "video/play",
@@ -64,6 +69,7 @@ const routes = createBrowserRouter([
         path:'wallet',
         element:<AdminWallet/>
       },
+     
       {
        path:'createAdd',
        element:<CreateAdd/>
