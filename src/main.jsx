@@ -25,6 +25,7 @@ import AdminWallet from './Admin/AdminWallet.jsx';
 import SearchVideo from './Admin/SearchVideo.jsx';
 import DeleteVideo from './Admin/DeleteVideo.jsx';
 import Team from './User/Team.jsx';
+import Employ from './Employ/Employ.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ const routes = createBrowserRouter([
   {
     path:"/careers",
     element:<CareerPage/>
+  },
+  {
+    path:'/Employ',
+    element:<Employ/>
   }
   
 ]);
