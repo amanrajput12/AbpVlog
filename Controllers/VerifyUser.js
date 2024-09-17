@@ -1,4 +1,5 @@
 import { User } from "../Models/UserSchema.js";
+import { Wallet } from "../Models/WalletSchema.js";
 import { Mailsend } from "../Utils/Mailsend.js";
 
 
@@ -12,7 +13,27 @@ export const VerifyUser = async function (req,res) {
             gradepay:Number(gradepay) 
         })
         if(user){
+                  console.log("on verify for add amount",user);
+                  const referedemail = user.referedBy;
+                  let amount =0;
 
+                  switch (Number(gradepay)) {
+                    case 1600:
+                        amount = 150;
+                        break;
+                    case 3100:
+                        amount = 300;
+                        break;
+                    case 5100:
+                        amount = 500;
+                        break;
+                    default:
+                        amount = 0; // If no matching gradepay, don't add any amount
+                }
+                   const refamount = await Wallet.findOneAndUpdate({email:referedemail},{
+                   $inc:{TotalBalance:amount}
+                   })
+  
             const emailContent = `
             <div style="font-family: Arial, sans-serif; line-height: 1.6;">
                 <h2 style="color: #4CAF50;">Congratulations, ${user.username}!</h2>
