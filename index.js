@@ -13,6 +13,7 @@ import { Memberrouter } from "./Routes/MemberRoute.js";
 import { Adminrouter } from "./Routes/AdminRoute.js";
 import { Walletrouter } from "./Routes/WalletRoute.js";
 import { Addsroute } from "./Routes/AddsRoute.js";
+import { Employrouter } from "./Routes/EmployRoute.js";
 
 
 const app = express();
@@ -39,6 +40,7 @@ app.use("/v1/member",Memberrouter)
 app.use('/v1/admin',Adminrouter)
 app.use("/v1/wallet",Walletrouter)
 app.use('/v1/adds',Addsroute)
+app.use('/v1/employ',Employrouter)
 
 app.get("/", (req, res) => {
     console.log("Monitoring the application");
