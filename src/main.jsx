@@ -116,6 +116,13 @@ const routes = createBrowserRouter([
 
 const root = createRoot(document.getElementById('root'));
 
+if(import.meta.env.VITE_ENV== "develpment"){
+  console.log=()=>{}
+  console.debug=()=>{}
+  console.info=()=>{}
+  console.warn=()=>{}
+  console.error=()=>{}
+}
 root.render(
   <Provider store={Appstore}>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_clientId}>
