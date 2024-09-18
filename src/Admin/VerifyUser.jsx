@@ -14,6 +14,11 @@ const VerifyUser = () => {
   useEffect(() => {
     dispatch(VerifyUserData(userId));
   }, [dispatch]);
+  function handledelete(e){
+    e.stopPropagation();
+    console.log("click on the handledelte");
+    
+  }
 
   return (
     <div className="container mx-auto p-1">
@@ -36,6 +41,9 @@ const VerifyUser = () => {
                 </th>
                 <th className=" p-1 xl:py-3 xl:px-6 text-left">
                   Date
+                </th>
+                <th className=" p-1 xl:py-3 xl:px-6 text-left">
+                  Button
                 </th>
              
               </tr>
@@ -63,6 +71,9 @@ const VerifyUser = () => {
                   </td>
                   <td className=" xl:py-3 xl:px-6 text-left">
                     { `${new Date(user.createdAt).toLocaleString()}`}
+                  </td>
+                  <td className=" xl:py-3 xl:px-6 text-left">
+                   <button onClick={(e)=>handledelete(e)} className="p-2 rounded-md bg-green-600 hover:bg-green-300">Delete</button>
                   </td>
                 </tr>
               ))}
