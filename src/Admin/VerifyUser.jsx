@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { VerifyUserData } from "./VerifyUserData";
 import { userVerfication, viewImage } from "./VerifyUserSlice";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import Cookies from "js-cookie"
 
 const VerifyUser = () => {
@@ -14,14 +15,41 @@ const VerifyUser = () => {
   useEffect(() => {
     dispatch(VerifyUserData(userId));
   }, [dispatch]);
-  function handledelete(e){
+  async function handledelete(value){
+    const {e,deleteId}= value
     e.stopPropagation();
-    console.log("click on the handledelte");
+    console.log("click on the handledelte",value);
+
+   
+    try {
+      const response = await fetch(`/v1/admin/deleteuser`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          deleteId
+        })
+      });
+
+      const resp = await response.json();
+      if (response.ok) {
+        toast.success("User deleted successfully!");
+      } else {
+        throw new Error(resp.message || "Failed to delete user");
+      }
+      console.log("after delete user", resp);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      toast.error("Error deleting user: " + error.message);
+    }
     
   }
 
   return (
     <div className="container mx-auto p-1">
+      <Toaster />
       {user.loading && <h2 className="text-center text-xl">Loading...</h2>}
 
       {!user.loading && user.data?.length > 0 && (
@@ -73,7 +101,7 @@ const VerifyUser = () => {
                     { `${new Date(user.createdAt).toLocaleString()}`}
                   </td>
                   <td className=" xl:py-3 xl:px-6 text-left">
-                   <button onClick={(e)=>handledelete(e)} className="p-2 rounded-md bg-green-600 hover:bg-green-300">Delete</button>
+                   <button onClick={(e)=>handledelete({e,deleteId:user._id})} className="p-2 rounded-md bg-green-600 hover:bg-green-300">Delete</button>
                   </td>
                 </tr>
               ))}
