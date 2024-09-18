@@ -81,6 +81,35 @@ export const login = async function(req,res) {
     }
 }
 
+export const deleteuser = async function(req,res){
+    try {
+        
+        const {deleteId} = req.body
+        console.log("in delete",req.body);
+        
+        if(!deleteId){
+            return res.status(400).json({
+                message:"UserId is required",
+                sucess:false
+            })
+        }
+        const deletedata = await User.findByIdAndDelete({_id:deleteId})
+        console.log("delete data",deletedata);
+        
+        res.status(200).json({
+            message:"User Delete sucessfully",
+            sucess:true
+        })
+
+    } catch (error) {
+         console.log("error on delete user",error.message);
+         res.status(500).json({
+            message:"Server Error",
+            sucess:false
+         })
+         
+    }
+}
 
 export const Forverify = async function (req,res) {
        try {
