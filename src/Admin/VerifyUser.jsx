@@ -39,7 +39,7 @@ const VerifyUser = () => {
       } else {
         throw new Error(resp.message || "Failed to delete user");
       }
-      console.log("after delete user", resp);
+      console.log("after delete ", resp);
     } catch (error) {
       console.error("Error deleting user:", error);
       toast.error("Error deleting user: " + error.message);
