@@ -57,7 +57,7 @@ const VerifyUser = () => {
           <h3 className="text-2xl font-bold mb-4">Verify Users</h3>
           <table className="bg-white border border-gray-300">
             <thead>
-              <tr className="bg-gray-200 text-gray-900 text-sm xl:text-3xl uppercase leading-normal">
+              <tr className="bg-gray-200 text-gray-900 text-sm xl:text-xl uppercase leading-normal">
                 <th className="p-1 xl:py-3 xl:px-6 text-left">S.NO</th>
                 <th className="p-1 xl:py-3 xl:px-6 text-left">UserName</th>
                 <th className="p-1 xl:py-3 xl:px-6 text-center">Email</th>
