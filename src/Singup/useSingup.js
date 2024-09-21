@@ -46,11 +46,11 @@ const singup = createAsyncThunk("/user/sigup",async(value)=>{
               })
               const data = await resp.json()
               console.log("on register",data);
-              if(!data.success){
-                toast.error(data.message)
+              // if(!data.sucess){
+              //   toast.success(data.message)
                 
          
-              }
+              // }
               if(data.message == "user Login sucess"){
                 console.log(data.message);
                 
