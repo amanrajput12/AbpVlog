@@ -60,7 +60,7 @@ export const AddWallet = async function (userId, timespend, videoId) {
 
       // Handle referral bonus if `referedby` exists
       if (referedby) {
-        const referralBonus = (balanceToAdd * referralPercentage) / 100;
+        const referralBonus = parseFloat(((balanceToAdd * referralPercentage) / 100).toFixed(2));
         const referedbyWallet = await Wallet.findOne({
           email: referedby.email,
         });
