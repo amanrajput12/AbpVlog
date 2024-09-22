@@ -1,38 +1,38 @@
 import nodemailer from 'nodemailer';
-import dotenv from "dotenv"
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
+
 export const Mailsend = async (email, mailsubject, mailtext) => {
   try {
-    const accoutemail = process.env.user
-    const password = process.env.pass
+    const accountemail = process.env.user;
+    const password = process.env.pass;
+    
+    
+    
+    // Configure Nodemailer for Office 365 SMTP server
     const transporter = nodemailer.createTransport({
-       
-      host: 'smtpout.secureserver.net', // GoDaddy's SMTP server
-      port: 465, // Secure port for SSL
-      secure: true, // Use true for port 465
+      host: 'smtp.office365.com', // Office 365 SMTP server
+      port: 587, // TLS port
+      secure: false, // Use false for TLS (port 587)
       auth: {
-        user: accoutemail, // Your GoDaddy email
-        pass: password, // Your GoDaddy email password
+        user: accountemail, // Your Office 365 email
+        pass: password, // Your Office 365 email password
       },
+      tls: {
+        ciphers: 'SSLv3' // Add this to prevent certain TLS connection errors
+      }
     });
 
     let info = await transporter.sendMail({
-      from: accoutemail, // sender address
-      to: email, // list of receivers (should use the email parameter)
-      subject: mailsubject, // subject line (should use the mailsubject parameter)
-      html: mailtext
+      from: accountemail, // Sender address
+      to: email, // Recipient email address
+      subject: mailsubject, // Subject line
+      html: mailtext // Email content in HTML
     });
 
     console.log('Mail sent successfully:', info);
-    return info
+    return info;
   } catch (error) {
     console.log('Error sending mail:', error.message);
   }
 };
-
-
-
-
-
-
-
