@@ -10,6 +10,8 @@ const AdminHeader = () => {
         <button onClick={()=>navigate("/admin")} className={`bg-gradient-to-b m-1 xl:m-2  p-1 xl:p-4 text-yellow-50 rounded-md from-green-900 to-green-400 hover:from-green-200 hover:to-green-950 hover:text-black hover:shadow-slate-400  `}>
               checkVerify
         </button>
+        <button onClick={()=>navigate("/Employ/detail")} className={`bg-gradient-to-b m-1 xl:m-2  p-1 xl:p-4 text-yellow-50 rounded-md from-green-900 to-green-400 hover:from-green-200 hover:to-green-950 hover:text-black hover:shadow-slate-400  `}
+          >Employ</button>
         <button onClick={()=>navigate("createAdd")} className={`bg-gradient-to-b m-1 xl:m-2  p-1 xl:p-4 text-yellow-50 rounded-md from-green-900 to-green-400 hover:from-green-200 hover:to-green-950 hover:text-black hover:shadow-slate-400  `}>
              createAdd
         </button>

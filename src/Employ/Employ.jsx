@@ -8,7 +8,7 @@ const Employ = () => {
   const [attendance, setAttendance] = useState('');
   const [checkedOut, setCheckedOut] = useState(false);
   const [loader,setLoader] = useState(null)
-  const userId = Cookies.get('myid');
+  const userId = Cookies.get('employId');
   const navigate = useNavigate()
   const timerRef = useRef(null);
 

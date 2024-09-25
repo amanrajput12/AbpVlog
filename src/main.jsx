@@ -26,6 +26,9 @@ import SearchVideo from './Admin/SearchVideo.jsx';
 import DeleteVideo from './Admin/DeleteVideo.jsx';
 import Team from './User/Team.jsx';
 import Employ from './Employ/Employ.jsx';
+import ExmployDetail from './Employ/ExmployDetail.jsx';
+import AddEmploy from './Employ/AddEmploy.jsx';
+import EmployLogin from './Employ/EmployLogin.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -109,7 +112,29 @@ const routes = createBrowserRouter([
   },
   {
     path:'/Employ',
-    element:<Employ/>
+    children:[
+      {
+        path:'',
+    element:<EmployLogin/>
+        },
+        {
+          path:'attendence',
+          element:<Employ/>
+        },
+      {
+        path:'detail',
+       children:[
+        {
+          path:'',
+          element:<ExmployDetail/>
+        },
+        {
+          path:'add',
+          element:<AddEmploy/>
+        }
+       ]
+      }
+    ]
   }
   
 ]);
