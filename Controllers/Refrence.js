@@ -72,13 +72,23 @@ export const Refrence = async function (req, res) {
                 
             },
         );
-
+         
         // Update user with refrenceemail
         const refrenceupdate = await User.findOneAndUpdate(
             { email: refrenceEmail },
             { $push: { references: userEmail } }, // Use $push to add to the references array
         );
 
+        if(refrenceupdate.empId){
+            const employupdate = await User.findOneAndUpdate(
+                {MainempId: refrenceupdate.empId },
+                { $push: { references: userEmail } }, // Use $push to add to the references array
+            );
+            console.log("for employ check",employupdate);
+            
+        }
+    //    console.log("check refrenceupdate",refrenceupdate);
+       
         
 
         res.status(200).json({

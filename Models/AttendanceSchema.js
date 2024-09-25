@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const AttendanceSchema = new mongoose.Schema({
-    userId: {
+    EmployId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',  // Refers to the User Schema
+        ref: 'Employ',  // Refers to the User Schema
         required: true
     },
     date: {
