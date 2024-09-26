@@ -9,22 +9,19 @@ export const Mailsend = async (email, mailsubject, mailtext) => {
     
     
     
-    // Configure Nodemailer for Office 365 SMTP server
+   
     const transporter = nodemailer.createTransport({
-      host: 'smtp.office365.com', // Office 365 SMTP server
-      port: 587, // TLS port
+      host: 'smtp.gmail.com',
+      port: 587, 
       secure: false, // Use false for TLS (port 587)
       auth: {
-        user: accountemail, // Your Office 365 email
-        pass: password, // Your Office 365 email password
-      },
-      tls: {
-        ciphers: 'SSLv3' // Add this to prevent certain TLS connection errors
+        user: accountemail, 
+        pass: password, 
       }
     });
 
     let info = await transporter.sendMail({
-      from: accountemail, // Sender address
+      from: "bhomiade@bae.org.in", // Sender address
       to: email, // Recipient email address
       subject: mailsubject, // Subject line
       html: mailtext // Email content in HTML
