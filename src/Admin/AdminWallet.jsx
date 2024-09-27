@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const AdminWallet = () => {
   const [walletData, setWalletData] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null); // Track selected user for confirmation
   const [successMessage, setSuccessMessage] = useState(''); // Success message after sending money
+  const moneyvalue = useRef(null)
 
   // Fetch data from API
   useEffect(() => {
@@ -38,7 +39,7 @@ const AdminWallet = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: selectedUser.email }),
+        body: JSON.stringify({ email: selectedUser.email,money:moneyvalue }),
       });
 
       if (response.ok) {
@@ -109,6 +110,9 @@ const AdminWallet = () => {
           <div className="bg-white p-5 rounded-lg shadow-lg">
             <h2 className="text-lg font-bold mb-4">Confirm Action</h2>
             <p>Do you want to send money to <strong>{selectedUser.email}</strong>?</p>
+            <input type="number" placeholder='Money' className='text-black' onChange={(e)=>{
+               moneyvalue.current=e.target.value
+            }} />
             <div className="mt-4 flex justify-end space-x-2">
               <button
                 onClick={() => setSelectedUser(null)}
