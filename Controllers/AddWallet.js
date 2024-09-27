@@ -268,19 +268,22 @@ export const AdminWallet = async function (req,res) {
 
 export const GrantWithdrwal = async function(req,res){
   try {
-     const {email} = req.body 
-         console.log(req.body);
+     const {email,money} = req.body 
+     const moneyvalue =Number(money.current);
+         console.log("for withdrawl grant acess ",req.body,moneyvalue);
          
      const update = await Wallet.findOneAndUpdate(
-      {email:email},
-      {TotalBalance:0}
+      { email: email, TotalBalance: { $gte: moneyvalue } },
+      { $inc: { TotalBalance: -moneyvalue } }, // Decrease the balance by money
+      { new: true } // Return the updated document
      )
+     if(update){
      res.status(200).json({
       message:"Wallet update sucess",
       sucess:true,
       data:update
      })
-     
+    }
 
   } catch (error) {
     console.log("error on grant withdrwal",error.message);
