@@ -39,7 +39,7 @@ export const VerifyUser = async function (req,res) {
                 <h2 style="color: #4CAF50;">Congratulations, ${user.username}!</h2>
                 <p>We are delighted to inform you that your profile has been successfully <strong>verified</strong> on <em>BHOMI ADVERTISEMENT ENTERPRISE</em>. You now have access to all the premium features and benefits reserved for verified users.</p>
                 
-                <p>If you have any questions or require further assistance, our support team is just an email away. Feel free to reach out to us at <a href="mailto:bhomiade@bae.org.in">bhomiade@bae.org.in</a>, and we’ll be happy to assist you.</p>
+                <p>If you have any questions or require further assistance, our support team is just an email away. Feel free to reach out to us at <a href="mailto:bhomi.ade@bae.org.in">bhomi.ade@bae.org.in</a>, and we’ll be happy to assist you.</p>
                 
                 <p>Thank you for being a valued member of our community. We look forward to seeing you make the most of our platform!</p>
                 
