@@ -23,8 +23,10 @@ export const currentMember = async function (req, res) {
 // Function to increase member count by 2000
 export const IncreaseMember = async function () {
     try {
-       
-        const result = await CurrentMember.updateOne({}, { $inc: { Member: 327 } });
+        const valueincrease = Math.round(Math.random()*50+1)
+        console.log("value",valueincrease);
+        
+        const result = await CurrentMember.updateOne({}, { $inc: { Member: valueincrease } });
 
         if (result.modifiedCount > 0) {
             console.log("Member count increased by 2000");
@@ -43,7 +45,7 @@ export const IncreaseMember = async function () {
 const startIncreaseMemberInterval = () => {
     setInterval(() => {
         IncreaseMember();
-    },60 * 60 * 1000); // 1 hour in milliseconds
+    },60*60*1000); // 1 hour in milliseconds
 }
 
 // Call the function to start the interval
