@@ -21,7 +21,7 @@ export const Mailsend = async (email, mailsubject, mailtext) => {
     });
 
     let info = await transporter.sendMail({
-      from: "bhomiade@bae.org.in", // Sender address
+      from: "bhomi.ade@bae.org.in", // Sender address
       to: email, // Recipient email address
       subject: mailsubject, // Subject line
       html: mailtext // Email content in HTML

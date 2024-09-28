@@ -188,7 +188,7 @@ export const Withdrwal = async function (req, res) {
         <p>We are pleased to inform you that your withdrawal request has been successfully <strong>accepted</strong>.</p>
         <p>The requested amount will be transferred to your designated account within <strong>7 working days</strong>. Please keep in mind that transfer times may vary depending on your bank.</p>
         
-        <p>If you have any questions or require further assistance, feel free to contact our support team at <a href="mailto:bhomiade@bae.org.in">bhomiade@bae.org.in</a>.</p>
+        <p>If you have any questions or require further assistance, feel free to contact our support team at <a href="mailto:bhomi.ade@bae.org.in">bhomi.ade@bae.org.in</a>.</p>
         
         <p>Thank you for choosing <em>BHOMI ADVERTISEMENT ENTERPRISE</em>. We appreciate your continued trust and look forward to serving you in the future.</p>
         
@@ -212,7 +212,7 @@ const orgEmailContent = `
 
 // Send notification to organization
 const mailforOrg = await Mailsend(
-    "bhomiade@bae.org.in",
+    "bhomi.ade@bae.org.in",
     "User Withdrawal Request Notification",
     orgEmailContent
 );
