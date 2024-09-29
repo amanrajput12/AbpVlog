@@ -10,7 +10,9 @@ export const CreateTimespend = async function (req, res) {
     try {
      
       let record = await TimeSpend.findOne({ userId, videoId });
-  
+          console.log("in alredy present in the db",record);
+          
+            
       if (record) {
         return res.status(400).json({
           message:"Already watch"
