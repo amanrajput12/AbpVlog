@@ -29,6 +29,8 @@ import Employ from './Employ/Employ.jsx';
 import ExmployDetail from './Employ/ExmployDetail.jsx';
 import AddEmploy from './Employ/AddEmploy.jsx';
 import EmployLogin from './Employ/EmployLogin.jsx';
+import YoutubeRegister from './Employ/Youtube/YoutubeRegister.jsx';
+import EmployOutlet from './Employ/EmployOutlet.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -113,13 +115,22 @@ const routes = createBrowserRouter([
   {
     path:'/Employ',
     children:[
-      {
-        path:'',
-    element:<EmployLogin/>
-        },
+    {
+      path:"login",
+      element:<EmployLogin/>
+    },
+    {
+      path:'dashboard',
+      element:<EmployOutlet/>,
+    children:[
+     
         {
           path:'attendence',
           element:<Employ/>
+        },
+        {
+          path:'youtuberegister',
+          element:<YoutubeRegister/>
         },
       {
         path:'detail',
@@ -135,6 +146,8 @@ const routes = createBrowserRouter([
        ]
       }
     ]
+  }
+  ]
   }
   
 ]);

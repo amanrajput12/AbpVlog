@@ -63,7 +63,7 @@ const EmployLogin = () => {
           Cookies.set('employId',resp.employ.employId,{expires:value})
            toast.success(resp.message)
            intervalRef.current = setTimeout(() => {
-              navigate('attendence')
+              navigate('/Employ/dashboard/attendence')
            }, 2000);
         }
         else if(!resp.success){

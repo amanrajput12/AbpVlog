@@ -66,7 +66,7 @@ const Header = () => {
             </button>
           )}
           {userRole==='employ' && (
-            <button    onClick={() => navigate('/Employ')} className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition-colors'>
+            <button    onClick={() => navigate('/Employ/login')} className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition-colors'>
               Employ Dashboard
             </button>
           )}

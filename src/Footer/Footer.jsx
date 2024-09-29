@@ -39,7 +39,7 @@ const Footer = () => {
       {/* Contact Information */}
       <div className=" py-4">
         <div className="max-w-6xl mx-auto text-center text-gray-400">
-          <p>Reach us: <a href="mailto:bhomiade@bae.org.in" className="text-blue-400 hover:underline">bhomiade@bae.org.in</a></p>
+          <p>Reach us: <a href="mailto:bhomi.ade@bae.org.in" className="text-blue-400 hover:underline">bhomi.ade@bae.org.in</a></p>
         </div>
       </div>
     </footer>
