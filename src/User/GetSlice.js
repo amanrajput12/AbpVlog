@@ -10,11 +10,15 @@ const GetSlice = createSlice({
         error:null,
         data:[],
         videoId:null,
+        cardNo:null
        
     },
     reducers:{
         addvideoId:(state,action)=>{
                state.videoId = action.payload
+        },
+        addcardNo:(state,action)=>{
+            state.cardNo=action.payload
         }
     },
     extraReducers:(builder)=>{
@@ -33,5 +37,5 @@ const GetSlice = createSlice({
 })
 
 
-export const  {addvideoId} = GetSlice.actions
+export const  {addvideoId,addcardNo} = GetSlice.actions
 export default  GetSlice.reducer

@@ -27,7 +27,7 @@ const App = () => {
     
   useEffect(() => {
     if (acess) {
-      navigate('/video');
+      navigate('/card');
     }
   }, [acess]);
 
@@ -48,6 +48,6 @@ const App = () => {
     
     </div>
   );
-};
+}
 
 export default App;

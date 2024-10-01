@@ -4,11 +4,12 @@ import { GetVideo } from './UseGetVideo.js';
 import { useNavigate } from 'react-router-dom';
 import { addvideoId } from './GetSlice.js';
 import Cookies from "js-cookie"
-const Video = () => {
+const CardVideo = () => {
   const dispatch = useDispatch();
   const video = useSelector((store) => store.GetVideo);
   const userId = Cookies.get('myid');
   const navigate = useNavigate();
+
 
   useEffect(() => {
     dispatch(GetVideo({userId,cardNo:video.cardNo}));
@@ -49,4 +50,4 @@ const Video = () => {
   );
 };
 
-export default Video;
+export default CardVideo;

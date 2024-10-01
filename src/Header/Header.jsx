@@ -45,7 +45,7 @@ const Header = () => {
     >
       <div className='flex h-20 items-center justify-around'>
         
-        {/* Logo Section */}
+        {/* Logo Section */ }
         <div className="ml-4 text-2xl font-bold cursor-pointer">
           <img
             onClick={() => { isHomeRoute ? "" : navigate("/video") }}

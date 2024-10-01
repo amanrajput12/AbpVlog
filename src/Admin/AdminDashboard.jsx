@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DateTimePicker from "react-datetime-picker";
 
@@ -17,6 +17,8 @@ const AdminDashboard = () => {
   const [data, setData] = useState(null);
   const [startTime, SetStartTime] = useState(null);
   const [endTime, SetEndTime] = useState(null);
+  const cardNo = useRef(null)
+  const Amount = useRef(null)
 
   const dispatch = useDispatch();
 
@@ -67,8 +69,18 @@ const AdminDashboard = () => {
                className="text-orange-500"
               />
             </div>
+            <div className=' flex flex-col  xl:flex-row text-black gap-1'>
+              <input ref={cardNo} onChange={(e)=>{ cardNo.current =e.target.value
+              console.log("card value",cardNo);
+              
+              }}  className='rounded-md p-1 ' type="text" placeholder='cardNo' />
+              <input ref={Amount}  onChange={(e)=>{ Amount.current =e.target.value
+              console.log("Amount",Amount);
+              
+              }} className='rounded-md p-1' type="text" placeholder='Amount' />
+            </div>
             <button
-              onClick={() => dispatch(VideoAdd({ startTime, endTime, id: data.id.videoId, snippet: data.snippet ,toast,userId}))}
+              onClick={() => dispatch(VideoAdd({ startTime, endTime, id: data.id.videoId, snippet: data.snippet ,toast,userId,cardNo:cardNo.current,Amount:Amount.current}))}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             >
               Upload

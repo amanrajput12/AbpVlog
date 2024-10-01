@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 const VideoAdd = createAsyncThunk("/Admin/AddVideo",async function(value){
     try {
             console.log("value",value); 
-            const {startTime,endTime,id,snippet,toast,userId} = value
+            const {startTime,endTime,id,snippet,toast,userId,cardNo,Amount} = value
             const resp = await fetch("/v1/Video/admin/add",{
                 method:"POST",
                 headers: {
@@ -15,7 +15,9 @@ const VideoAdd = createAsyncThunk("/Admin/AddVideo",async function(value){
                   endTime,
                   id,
                   snippet,
-                  userId
+                  userId,
+                  cardNo,
+                  Amount
                
                 })
               })

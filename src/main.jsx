@@ -31,6 +31,8 @@ import AddEmploy from './Employ/AddEmploy.jsx';
 import EmployLogin from './Employ/EmployLogin.jsx';
 import YoutubeRegister from './Employ/Youtube/YoutubeRegister.jsx';
 import EmployOutlet from './Employ/EmployOutlet.jsx';
+import Cards from './User/Cards.jsx';
+import CardVideo from './User/CardVideo.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -40,6 +42,14 @@ const routes = createBrowserRouter([
       {
         path: "",
         element: <LoginMain />
+      },
+      {
+        path:"card",
+        element:<Cards/>
+      },
+      {
+       path:'cardvideo',
+       element:<CardVideo/>
       },
       {
         path: "video",
