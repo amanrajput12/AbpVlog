@@ -1,11 +1,14 @@
 import { Router } from "express"
-import { YoutubeRegisation } from "../Controllers/Youtube.js"
-
+import { GetYoutubeCard, YoutubeRegisation } from "../Controllers/Youtube.js"
+import { handleMulterError, upload } from "../Middleware/Multer.js";
 
 
 
 const Youtuberouter = Router()
 
-Youtuberouter.route("/register").post(YoutubeRegisation)
+
+Youtuberouter.route("/register").post( upload.single('thumbnail'), 
+handleMulterError,YoutubeRegisation)
+Youtuberouter.route("/getcard").post(GetYoutubeCard)
 
 export {Youtuberouter}

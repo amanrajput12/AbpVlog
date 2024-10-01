@@ -1,5 +1,5 @@
 import { YoutubeRegister } from "../Models/YoutubeRegisterSchema.js";
-
+import { uploadOnCloudinary } from "../Utils/Cloudinary.js";
 
 export const YoutubeRegisation = async function (req,res) {
     try {
@@ -11,13 +11,27 @@ export const YoutubeRegisation = async function (req,res) {
             sucess:false
         })
        }
+       const  thumbnail = req.file.path
+       console.log("for photo",thumbnail);
+
+       const result = await uploadOnCloudinary(req.file.path);
+               
+           
+       if(!result.url){
+         return res.status(400).json({
+             message:"Error on Upload the image",
+             success:false
+         })
+      }
+       
        const register = await YoutubeRegister.create({
         UserEmail,
         Name,
         ChannelName,
         MobileNo,
         EmplId,
-        Subscription
+        Subscription,
+        thumbnail:result.url
        })
        if(register){
         res.status(200).json({
@@ -33,5 +47,29 @@ export const YoutubeRegisation = async function (req,res) {
             sucess:false
            })
            
+    }
+}
+
+export const GetYoutubeCard = async function (req,res) {
+    try {
+      const card = await YoutubeRegister.find({isverifed:true}) 
+    
+      console.log("card data",card);
+      
+      if(card){
+        res.status(200).json({
+            message:"sucessfully Get the card",
+            data:card,
+            sucess:true
+        })
+      }
+      
+    } catch (error) {
+        console.log("error on getting the youtube card",error.message);
+        res.status(500).json({
+            message:"Server Error",
+            sucess:false
+        })
+        
     }
 }

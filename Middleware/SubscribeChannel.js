@@ -41,6 +41,8 @@ async function Subscribe(value) {
 export const SubscibeChannel  = async function(req,res,next){
     try {
         const {acessToken} = req.body 
+        console.log("acess token in subscibe",acessToken);
+        
         const resp = await fetch(`https://www.googleapis.com/youtube/v3/subscriptions?part=id&forChannelId=UCjICW5kTfJa0Kqgt5WOP2cA&mine=true`, {
             headers: {
               Authorization: `Bearer ${acessToken}`,
@@ -49,11 +51,11 @@ export const SubscibeChannel  = async function(req,res,next){
           })
           const data = await resp.json()
           console.log(data);
-          if(data.items.length>=1){
+          if(data?.items?.length>=1){
             console.log("subscibe already to the channel");
            next()
           }
-          else if(data.items.length==0){
+          else if(data?.items?.length==0){
             console.log("not subscibe");
 
            const myresp = await Subscribe({acessToken,channelId:"UCjICW5kTfJa0Kqgt5WOP2cA"})

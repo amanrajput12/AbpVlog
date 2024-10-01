@@ -2,6 +2,7 @@ import { User } from "../Models/UserSchema.js";
 import { Video } from "../Models/VideoSchema.js";
 import { Wallet } from "../Models/WalletSchema.js";
 import { Mailsend } from "../Utils/Mailsend.js";
+import {WithdrwalAdd} from "../Models/WithdrwalSchema.js"
 
 export const AddWallet = async function (userId, timespend, videoId) {
   try {
@@ -138,8 +139,20 @@ export const Withdrwal = async function (req, res) {
 
     // Find the user's wallet by email
     const wallet = await Wallet.findOne({ email }).populate("userId");
+
+    console.log("wallet",wallet);
+    
+    const addwithdrwal = await WithdrwalAdd.create({
+      TotalBalance:wallet.TotalBalance,
+      email:wallet.email,
+      userId:wallet.userId._id
+      })
+      console.log("for create withdrwal",addwithdrwal);
+      
+    
       const username =wallet.userId.username
       console.log("on wallet reques",wallet.userId.username);
+      
       
     
     if (!wallet) {

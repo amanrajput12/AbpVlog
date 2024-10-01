@@ -14,6 +14,14 @@ const VideoSchema = new mongoose.Schema({
         type:Date,
         required:true
     },
+    CardNo:{
+      type:String,
+      default:"1"
+    },
+    Amount:{
+      type:Number,
+      default:1
+    },
     snippet:{
         type:Object,
         required:true
