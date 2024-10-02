@@ -16,6 +16,8 @@ const AddEmploy = () => {
   const ifscCodeRef = useRef(null);
   const departmentRef = useRef(null);
   const passwordRef = useRef(null)
+  const EmployRole = useRef(null)
+  const BranchLocation = useRef(null)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -25,7 +27,7 @@ const AddEmploy = () => {
     // Only set the timeout if the form submission is successful (EmployData.CreateEmploy is true)
     if (EmployData.CreateEmploy) {
       intervalRef.current = setTimeout(() => {
-        navigate('/Employ/detail');
+        navigate('/Employ/dashboard/detail');
       }, 2000);
     }
 
@@ -49,7 +51,9 @@ const AddEmploy = () => {
       accountNo: accountNoRef.current.value,
       ifscCode: ifscCodeRef.current.value,
       department: departmentRef.current.value,
-      password:passwordRef.current.value
+      password:passwordRef.current.value,
+      BranchLocation:BranchLocation.current.value,
+      EmployRole:EmployRole.current.value
     };
     console.log('Form Data:', formData);
     dispatch(CreateEmploy({ formData, toast,userId }));
@@ -167,6 +171,35 @@ const AddEmploy = () => {
               id="Department"
               ref={departmentRef}
               placeholder="Department"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="BranchLocation" className="block text-sm xl:text-lg font-medium text-gray-700">
+            BranchLocation
+            </label>
+            <input
+              type="text"
+              id="BranchLocation"
+              ref={BranchLocation}
+              placeholder="BranchLocation"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+              required
+            />
+          </div>
+
+
+          <div className="mb-4">
+            <label htmlFor="EmployRole" className="block text-sm xl:text-lg font-medium text-gray-700">
+            EmployRole
+            </label>
+            <input
+              type="text"
+              id="EmployRole"
+              ref={EmployRole}
+              placeholder="EmployRole"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
               required
             />

@@ -61,9 +61,12 @@ const EmployLogin = () => {
         if(resp.success){
           const value = new Date(Date.now() + 55 * 60 * 1000)
           Cookies.set('employId',resp.employ.employId,{expires:value})
+           if(resp.employ.EmployRole =="manager"){
+            Cookies.set('employManager',resp.employ.EmployRole,{expires:value})
+           }
            toast.success(resp.message)
            intervalRef.current = setTimeout(() => {
-              navigate('/Employ/dashboard/attendence')
+              navigate('/Employ/dashboard')
            }, 2000);
         }
         else if(!resp.success){

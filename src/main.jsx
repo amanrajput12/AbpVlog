@@ -33,6 +33,8 @@ import YoutubeRegister from './Employ/Youtube/YoutubeRegister.jsx';
 import EmployOutlet from './Employ/EmployOutlet.jsx';
 import Cards from './User/Cards.jsx';
 import CardVideo from './User/CardVideo.jsx';
+import EmployProfile from './Employ/EmployProfile.jsx';
+import ManagerVerify from './Employ/Manager/ManagerVerify.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -133,7 +135,10 @@ const routes = createBrowserRouter([
       path:'dashboard',
       element:<EmployOutlet/>,
     children:[
-     
+      {
+       path:'',
+       element:<EmployProfile/>
+      },
         {
           path:'attendence',
           element:<Employ/>
@@ -142,6 +147,11 @@ const routes = createBrowserRouter([
           path:'youtuberegister',
           element:<YoutubeRegister/>
         },
+        {
+          path:'verification',
+          element:<ManagerVerify/>
+        },
+
       {
         path:'detail',
        children:[

@@ -11,6 +11,7 @@ const AddEmploySlice = createSlice({
     CreateEmploy: false,
     AdminData: [],  // Add a new state to store the admin data
     AdminLoading: false, // State to manage loading for AdminEmploy
+   
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -43,5 +44,7 @@ const AddEmploySlice = createSlice({
       });
   },
 });
+
+
 
 export default AddEmploySlice.reducer;

@@ -10,7 +10,7 @@ export const CreateEmploy = createAsyncThunk('/employ/create',async function (va
        
         const createdata = value.formData
      
-        const {department,ifscCode,accountNo,joiningDate,reportingManager,email,emplId,name,password}=createdata
+        const {department,ifscCode,accountNo,joiningDate,reportingManager,email,emplId,name,password,BranchLocation,EmployRole}=createdata
         const data = await fetch(`/v1/employ/create`,{
             method:"POST",
                 headers: {
@@ -26,7 +26,9 @@ export const CreateEmploy = createAsyncThunk('/employ/create',async function (va
                     emplId,
                     name,
                     password,
-                    userId:value.userId
+                    userId:value.userId,
+                    BranchLocation,
+                    EmployRole
                 })
         })
         const resp =await data.json()
