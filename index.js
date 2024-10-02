@@ -16,6 +16,7 @@ import { Addsroute } from "./Routes/AddsRoute.js";
 import { Employrouter } from "./Routes/EmployRoute.js";
 import { Youtuberouter } from "./Routes/YotubeRoute.js";
 import { Cardrouter } from "./Routes/CardRoute.js";
+import { Managerroute } from "./Routes/ManagerRoute.js";
 
 
 const app = express();
@@ -45,6 +46,7 @@ app.use('/v1/adds',Addsroute)
 app.use('/v1/employ',Employrouter)
 app.use('/v1/youtube',Youtuberouter)
 app.use('/v1/card',Cardrouter)
+app.use('/v1/manager',Managerroute)
 
 app.get("/", (req, res) => {
     console.log("Monitoring the application");

@@ -60,7 +60,8 @@ export const login = async function(req,res) {
             })
         }
         if(alreadyuser){
-            const value  = await User.findOneAndUpdate({email},{acessToken:acessToken})
+            const value  = await User.findOneAndUpdate({email},{acessToken:acessToken},
+                { new: true })
             console.log('on resp send',value);
             
             return  res.status(200).json({

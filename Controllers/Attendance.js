@@ -72,11 +72,11 @@ export const EmployAttendace = async function (req, res) {
 export const CreateEmploy = async function (req,res) {
     try {
     
-         const {department,ifscCode,accountNo,joiningDate,reportingManager,email,emplId,name,password}=req.body
+         const {department,ifscCode,accountNo,joiningDate,reportingManager,email,emplId,name,password,BranchLocation,EmployRole}=req.body
          console.log("in create employ",req.body);
          
 
-         if(!(department,ifscCode,accountNo,joiningDate,reportingManager,email,emplId,name,password)){
+         if(!(department,ifscCode,accountNo,joiningDate,reportingManager,email,emplId,name,password,BranchLocation,EmployRole)){
             return res.status(400).json({
                 message:"All field required",
                 sucess:false
@@ -99,7 +99,9 @@ export const CreateEmploy = async function (req,res) {
             email,
             emplId,
             name,
-            password
+            password,
+            BranchLocation,
+            EmployRole
            })
 
            res.status(201).json({
@@ -113,6 +115,31 @@ export const CreateEmploy = async function (req,res) {
         res.status(500).json({
             message:"Server Error",
             sucess:false
+        })
+        
+    }
+}
+
+export const EmployData = async function (req,res) {
+    try {
+        const {employId} = req.body
+
+         const employdata = await Employ.find({_id:employId}).select('-password')
+         console.log("employ data",employdata);
+
+         if(employdata){
+            res.status(200).json({
+                message:'Get data successfully',
+                data:employdata,
+                sucess:true
+            })
+         }
+         
+    } catch (error) {
+        console.log("error on getting profile",error.message);
+        res.status(500).json({
+            message:"Server Error",
+            sucess:false 
         })
         
     }
@@ -171,7 +198,8 @@ export const EmployLogin = async function (req, res) {
             employ: {
                 email: employ.email,
                 name: employ.name,
-                employId:employ._id
+                employId:employ._id,
+                EmployRole:employ.EmployRole
                 // You can return additional details here if needed
             }
         });

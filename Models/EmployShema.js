@@ -36,7 +36,15 @@ const EmploySchema = new mongoose.Schema({
    password:{
     type:String,
     required:true
-   }
+   },
+   BranchLocation:{
+    type:String,
+    required:true
+   },
+     EmployRole:{
+        type:String,
+        required:true
+     }
 },{
     timestamps:true
 })
