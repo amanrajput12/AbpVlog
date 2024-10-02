@@ -21,7 +21,7 @@ const App = () => {
 
     useEffect(() => {
       if (accessToken && userId && accessToken!=="undefined" && userId!=="undefined" ) {
-        navigate('/video');
+        navigate('/card');
       }
     }, [accessToken, userId, navigate]);
     

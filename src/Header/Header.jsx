@@ -48,7 +48,7 @@ const Header = () => {
         {/* Logo Section */ }
         <div className="ml-4 text-2xl font-bold cursor-pointer">
           <img
-            onClick={() => { isHomeRoute ? "" : navigate("/video") }}
+            onClick={() => { isHomeRoute ? "" : navigate("/card") }}
             className='w-12 rounded-md'
             src={logo}
             alt="Logo"
