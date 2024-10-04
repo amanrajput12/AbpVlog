@@ -9,6 +9,9 @@ export const AddWallet = async function (userId, timespend, videoId) {
     console.log(userId, timespend);
     const userdata = await User.findOne({ _id: userId });
     const validrequest = await Video.findOne({ videoId });
+    console.log("in give the amount add wallet ",validrequest.Amount);
+    const AmountToadded = validrequest.Amount
+    
     if (!validrequest) {
       console.log("It not authorize to give watchtime");
 
@@ -24,15 +27,19 @@ export const AddWallet = async function (userId, timespend, videoId) {
 
     if (userdata.gradepay == 1600) {
       console.log("this is for 1600");
-      balanceToAdd = 15;
+      balanceToAdd = AmountToadded  ;
       referralPercentage = 1; // 1% for 1600 gradepay
     } else if (userdata.gradepay == 3100) {
       console.log("this is for 3100");
-      balanceToAdd = 30;
+      //  15 percentage of amount  extra add
+      const percent = ((15*AmountToadded)/100)
+      balanceToAdd = parseFloat((AmountToadded+percent).toFixed(2));
       referralPercentage = 1.25; // 1.25% for 3100 gradepay
     } else if (userdata.gradepay == 5100) {
       console.log("this is for 5100");
-      balanceToAdd = 50;
+      // 30 percentage of amount extract add
+      const percent = ((30*AmountToadded)/100)
+      balanceToAdd = parseFloat((AmountToadded+percent).toFixed(2));
       referralPercentage = 1.5; // 1.5% for 5100 gradepay
     }
 
@@ -43,7 +50,7 @@ export const AddWallet = async function (userId, timespend, videoId) {
 
       if (alreadyWallet) {
         // Update existing wallet balance by adding the new balance
-        const updatedBalance = alreadyWallet.TotalBalance + balanceToAdd;
+        const updatedBalance = parseFloat((alreadyWallet.TotalBalance + balanceToAdd).toFixed(2));
         await Wallet.findOneAndUpdate(
           { email: userdata.email },
           { TotalBalance: updatedBalance }
@@ -68,8 +75,7 @@ export const AddWallet = async function (userId, timespend, videoId) {
 
         if (referedbyWallet) {
           // Update referrer's wallet with the referral bonus
-          const updatedReferralBalance =
-            referedbyWallet.TotalBalance + referralBonus;
+          const updatedReferralBalance =parseFloat((referedbyWallet.TotalBalance + referralBonus).toFixed(2));
           await Wallet.findOneAndUpdate(
             { email: referedby.email },
             { TotalBalance: updatedReferralBalance }
