@@ -7,6 +7,7 @@ import VerifyUserSlice from "../src/Admin/VerifyUserSlice.js";
 import AddsSlice from "../src/Singup/AddsSlice.js";
 import AddEmploySlice from "../src/Employ/AddEmploySlice.js";
 import ManagerSlice from "../src/Employ/Manager/ManagerSlice.js";
+import TeamSlice from "../src/User/TeamSlice.js"
 
 
 const Appstore = configureStore({
@@ -18,7 +19,8 @@ const Appstore = configureStore({
         VerifyUser:VerifyUserSlice,
         Adds:AddsSlice,
         Employ:AddEmploySlice,
-        Manager:ManagerSlice
+        Manager:ManagerSlice,
+        Team:TeamSlice
     }
 })
 

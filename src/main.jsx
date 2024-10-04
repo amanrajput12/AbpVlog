@@ -35,6 +35,7 @@ import Cards from './User/Cards.jsx';
 import CardVideo from './User/CardVideo.jsx';
 import EmployProfile from './Employ/EmployProfile.jsx';
 import ManagerVerify from './Employ/Manager/ManagerVerify.jsx';
+import TeamWallet from './User/Teamwallet.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const routes = createBrowserRouter([
       {
         path:'team',
         element:<Team/>
+      },
+      {
+        path:'team/wallet',
+        element:<TeamWallet/>
       },
       {
         path: "video/play",

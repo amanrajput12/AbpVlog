@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import ReactLoading from 'react-loading';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { TeamWallet } from './UseTeamWallet.js';
 
 const Team = () => {
   const userId = Cookies.get('myid');
   const [team, setTeam] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   // Fetch team data
   useEffect(() => {
@@ -62,11 +67,15 @@ const Team = () => {
         {team && team.length > 0 ? (
           <div className="w-full space-y-4">
             {team.map((member, index) => (
-              <div
+              <div onClick={()=>{
+                
+                dispatch(TeamWallet(member))
+                navigate('wallet')
+              }}
                 key={index}
-                className="bg-white rounded-lg shadow-md p-4 text-center text-lg font-semibold text-gray-700"
+                className="bg-white hover:bg-slate-400 hover:cursor-pointer rounded-lg shadow-md p-4 text-center text-lg font-semibold text-gray-700"
               >
-                <p>{member}</p>
+                <p> <span className='bg-slate-950 p-2 rounded-lg text-white'>{index+1 }</span> {member}</p>
               </div>
             ))}
           </div>
