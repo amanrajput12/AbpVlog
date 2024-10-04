@@ -58,6 +58,8 @@ const EmployLogin = () => {
         })
         const resp = await logindata.json()
         console.log("resp on login",resp);
+
+     
         if(resp.success){
           const value = new Date(Date.now() + 55 * 60 * 1000)
           Cookies.set('employId',resp.employ.employId,{expires:value})
@@ -81,6 +83,10 @@ const EmployLogin = () => {
      
   }
   useEffect(()=>{
+
+    if(Cookies.get("employId")){
+      navigate("/Employ/dashboard")
+     }
      return ()=>{
       console.log("cleanup function run",intervalRef.current);
        clearTimeout(intervalRef.current)
