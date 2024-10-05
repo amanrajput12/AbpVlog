@@ -27,19 +27,20 @@ export const AddWallet = async function (userId, timespend, videoId) {
 
     if (userdata.gradepay == 1600) {
       console.log("this is for 1600");
-      balanceToAdd = AmountToadded  ;
+      const percent = AmountToadded*3
+      balanceToAdd = percent  ;
       referralPercentage = 1; // 1% for 1600 gradepay
     } else if (userdata.gradepay == 3100) {
       console.log("this is for 3100");
-      //  15 percentage of amount  extra add
-      const percent = ((15*AmountToadded)/100)
-      balanceToAdd = parseFloat((AmountToadded+percent).toFixed(2));
+      
+      const percent = AmountToadded*6
+      balanceToAdd = parseFloat((percent).toFixed(2));
       referralPercentage = 1.25; // 1.25% for 3100 gradepay
     } else if (userdata.gradepay == 5100) {
       console.log("this is for 5100");
-      // 30 percentage of amount extract add
-      const percent = ((30*AmountToadded)/100)
-      balanceToAdd = parseFloat((AmountToadded+percent).toFixed(2));
+      
+      const percent = AmountToadded*10
+      balanceToAdd = parseFloat((percent).toFixed(2));
       referralPercentage = 1.5; // 1.5% for 5100 gradepay
     }
 
