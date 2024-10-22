@@ -1,7 +1,7 @@
 
 [[redirects]]
   from = "/v1/*"
-  to = "https://bhomi.onrender.com/v1/:splat"
+  to = "https://abpvlog.onrender.com/v1/:splat"
   status = 200
   force = true
 
